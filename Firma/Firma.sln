@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firma.PortalWWW", "Firma.PortalWWW\Firma.PortalWWW.csproj", "{4884509B-2587-4A72-BBF7-D8B1E3EC5B19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firma.Intranet", "Firma.Intranet\Firma.Intranet.csproj", "{19EF1FBE-610D-4538-8DB6-0A2452F223EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4884509B-2587-4A72-BBF7-D8B1E3EC5B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4884509B-2587-4A72-BBF7-D8B1E3EC5B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4884509B-2587-4A72-BBF7-D8B1E3EC5B19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4884509B-2587-4A72-BBF7-D8B1E3EC5B19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19EF1FBE-610D-4538-8DB6-0A2452F223EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EF1FBE-610D-4538-8DB6-0A2452F223EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EF1FBE-610D-4538-8DB6-0A2452F223EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EF1FBE-610D-4538-8DB6-0A2452F223EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {425AD7F4-1111-4C33-9C30-63148FC50E04}
+	EndGlobalSection
+EndGlobal

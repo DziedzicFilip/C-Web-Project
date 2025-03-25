@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Firma.Intranet</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Firma.Intranet.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="content">
+        <header>
+            <nav class="navbar  border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between w-100">
+                        <ul class="navbar-nav d-flex flex-row ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Firma</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="#" asp-action="Index">Poczta</a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <img src="~/userIcon.png" alt="User Image"  />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="sidebar">
+            <h2 class=" border-bottom">Firma</h2>
+            <a  asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+            <a  asp-area="" asp-controller="Reports" asp-action="Index">Reports</a>
+            <a  asp-area="" asp-controller="Applications" asp-action="Index">Applications</a>
+            <a   asp-area="" asp-controller="Proposal" asp-action="Index">Proposal</a>
+            <div class="user-info">
+                <p>Zalogowany: User</p>
+                <a  asp-area="" asp-controller="#" asp-action="Index">Wyloguj</a>
+                <a  asp-area="" asp-controller="#" asp-action="Index">Ustawienia</a>
+            </div>
+        </div>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+      
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
