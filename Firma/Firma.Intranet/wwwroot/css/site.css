@@ -96,3 +96,10 @@ body {
     margin-top: auto;
  
 }
+main {
+    width: 80%;
+    margin-left: auto;
+}
+.row {
+    --bs-gutter-x: 0;
+}
