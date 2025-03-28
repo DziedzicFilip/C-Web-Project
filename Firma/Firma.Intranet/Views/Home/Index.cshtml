@@ -1,172 +1,81 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Magazyn";
 }
 
-<div class="">
+<div class=" mt-4">
     <div class="row">
-        <div class="col-md-3 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">45/76</h5>
-                    <p class="card-text">Invoices Awaiting Payment</p>
-                    <p class="card-text text-primary">Invoices Awaiting</p>
-                    <p class="card-text">$5,569</p>
+        <div class="col-md-3  box-shadow">
+            <div class="sticky-top" style="top: 20px;">
+                <h5>Opcje wyszukiwania i sortowania</h5>
+                <div class="mb-4">
+                    <label for="search" class="form-label">Szukaj produktów</label>
+                    <input type="text" id="search" class="form-control" placeholder="Szukaj produktów...">
+                </div>
+                <div class="mb-4">
+                    <label for="sort" class="form-label">Sortuj według</label>
+                    <select id="sort" class="form-control">
+                        <option>Sortuj według</option>
+                        <option>Nazwa</option>
+                        <option>Cena</option>
+                        <option>Ilość</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="filter" class="form-label">Filtruj według</label>
+                    <select id="filter" class="form-control">
+                        <option>Filtruj według</option>
+                        <option>Kategoria 1</option>
+                        <option>Kategoria 2</option>
+                        <option>Kategoria 3</option>
+                    </select>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">48/86</h5>
-                    <p class="card-text">Converted Leads</p>
-                    <p class="card-text text-warning">Converted Leads</p>
-                    <p class="card-text">52 Completed</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">16/20</h5>
-                    <p class="card-text">Projects in Progress</p>
-                    <p class="card-text text-success">Projects in Progress</p>
-                    <p class="card-text">16 Completed</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">46.59%</h5>
-                    <p class="card-text">Conversion Rate</p>
-                    <p class="card-text text-danger">Conversion Rate</p>
-                    <p class="card-text">$2,254</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Payment Record</h5>
-                    <div class="chart-placeholder" style="height: 200px; background-color: #f8f9fa;"></div>
-                    <div class="row mt-3">
-                        <div class="col-md-3">
-                            <p class="card-text">Awaiting</p>
-                            <p class="card-text text-primary">$5,486</p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="card-text">Completed</p>
-                            <p class="card-text text-success">$9,275</p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="card-text">Rejected</p>
-                            <p class="card-text text-danger">$3,868</p>
-                        </div>
-                        <div class="col-md-3">
-                            <p class="card-text">Revenue</p>
-                            <p class="card-text">$50,688</p>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="~/images/product1.jpg" class="card-img-top" alt="Product 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Produkt 1</h5>
+                            <p class="card-text">Opis produktu 1</p>
+                            <p class="card-text">Ilość: 10</p>
+                            <p class="card-text">Cena: $100</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Tasks Completed</h5>
-                    <p class="card-text">22/35 tasks completed</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-primary mt-2">28% more from last week</p>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="~/images/product2.jpg" class="card-img-top" alt="Product 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Produkt 2</h5>
+                            <p class="card-text">Opis produktu 2</p>
+                            <p class="card-text">Ilość: 5</p>
+                            <p class="card-text">Cena: $200</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">New Tasks</h5>
-                    <p class="card-text">0/20 tasks</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-success mt-2">34% more from last week</p>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="~/images/product3.jpg" class="card-img-top" alt="Product 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Produkt 3</h5>
+                            <p class="card-text">Opis produktu 3</p>
+                            <p class="card-text">Ilość: 8</p>
+                            <p class="card-text">Cena: $150</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Project Done</h5>
-                    <p class="card-text">20/30 projects done</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-danger mt-2">42% more from last week</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Tasks Completed</h5>
-                    <p class="card-text">22/35 tasks completed</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-primary mt-2">28% more from last week</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">New Tasks</h5>
-                    <p class="card-text">0/20 tasks</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-success mt-2">34% more from last week</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Project Done</h5>
-                    <p class="card-text">20/30 projects done</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-danger mt-2">42% more from last week</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Tasks Completed</h5>
-                    <p class="card-text">22/35 tasks completed</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-primary mt-2">28% more from last week</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">New Tasks</h5>
-                    <p class="card-text">0/20 tasks</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-success mt-2">34% more from last week</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Project Done</h5>
-                    <p class="card-text">20/30 projects done</p>
-                    <div class="chart-placeholder" style="height: 100px; background-color: #f8f9fa;"></div>
-                    <p class="card-text text-danger mt-2">42% more from last week</p>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="~/images/product4.jpg" class="card-img-top" alt="Product 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Produkt 4</h5>
+                            <p class="card-text">Opis produktu 4</p>
+                            <p class="card-text">Ilość: 12</p>
+                            <p class="card-text">Cena: $120</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
