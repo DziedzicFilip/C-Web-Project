@@ -26,7 +26,7 @@
                             </li>
                         
                             <li class="nav-item">
-                                <img src="~/userIcon.png" alt="User Image"  />
+                                <img src="~/images/user (1).png" alt="User Image"  />
                             </li>
                         </ul>
                     </div>
@@ -35,19 +35,22 @@
         </header>
         <div class="sidebar">
             <h2 class=" border-bottom">Firma</h2>
-            <a  asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
-            <a  asp-area="" asp-controller="Reports" asp-action="Index">Reports</a>
-            <a  asp-area="" asp-controller="Applications" asp-action="Index">Applications</a>
-            <a   asp-area="" asp-controller="Proposal" asp-action="Index">Proposal</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/images/package.png" alt="magazyn-icon" />Magazyn</a>
+            <a asp-area="" asp-controller="Reports" asp-action="Index"> <img src="~/images/pie-graph.png" alt="wykres-icon" /> Statystyki</a>
+            <a asp-area="" asp-controller="Applications" asp-action="Index"> <img src="~/images/plus.png"  alt="add-icon"/>Dodaj Produkt</a>
+            <a asp-area="" asp-controller="Proposal" asp-action="Index"> <img src="~/images/delivery-man.png"  alt="zamowienia-icon"/> Zamowienia</a>
             <div class="user-info">
                 <p>Zalogowany: User</p>
-                <a  asp-area="" asp-controller="#" asp-action="Index">Wyloguj</a>
-                <a  asp-area="" asp-controller="#" asp-action="Index">Ustawienia</a>
+                <a asp-area="" asp-controller="#" asp-action="Index"><img src="~/images/export.png" alt="logout-icon" /> Wyloguj</a>
+                <a asp-area="" asp-controller="#" asp-action="Index"><img src="~/images/settings.png" alt="ustawinia-icon" />Ustawienia</a>
             </div>
         </div>
       
             <main role="main" class="pb-3">
                 @RenderBody()
+                <footer>
+				<p>&copy; 2021 - Firma.Intranet</p>
+                </footer>
             </main>
        
       
