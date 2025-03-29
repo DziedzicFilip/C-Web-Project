@@ -109,3 +109,28 @@ main {
 .row {
     --bs-gutter-x: 0;
 }
+footer {
+  
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 82%;
+    right: 0;
+}
+
+    footer p {
+        margin: 0;
+    }
+.sort {
+    font-weight: bold;
+    background-color: #dedede;
+}
+
+
+.card-img-top {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+}
