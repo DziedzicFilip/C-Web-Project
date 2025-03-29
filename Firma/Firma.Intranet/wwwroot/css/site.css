@@ -110,7 +110,6 @@ main {
     --bs-gutter-x: 0;
 }
 footer {
-  
     color: black;
     padding: 20px 0;
     text-align: center;
@@ -118,6 +117,7 @@ footer {
     bottom: 0;
     width: 82%;
     right: 0;
+    background-color: #ECECEC;
 }
 
     footer p {
