@@ -22,6 +22,18 @@ namespace Firma.Intranet.Controllers
         {
             return View();
         }
+        public IActionResult Statystyki()
+        {
+            return View();
+        }
+        public IActionResult DodajProdukt()
+        {
+            return View();
+        }
+        public IActionResult Zamowienia()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

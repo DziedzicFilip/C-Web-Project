@@ -129,11 +129,15 @@ footer {
     background-color: #dedede;
 }
 
-
 .card-img-top {
     height: 100px;
     width: 100px;
-    margin: auto;
+    margin: 0 auto;
+}
+.Statystyki img {
+    height: 500px;
+    width: 500px;
+    margin: 20px;
 }
 
 
@@ -153,4 +157,12 @@ footer {
 
 .btn-outline-secondary:hover {
     background-color:  #404040;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
 }

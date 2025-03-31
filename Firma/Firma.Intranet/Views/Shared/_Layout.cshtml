@@ -36,9 +36,9 @@
         <div class="sidebar">
             <h2 class=" border-bottom">Firma</h2>
             <a asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/images/package.png" alt="magazyn-icon" /> Magazyn</a>
-            <a asp-area="" asp-controller="Reports" asp-action="Index"> <img src="~/images/pie-graph.png" alt="wykres-icon" /> Statystyki</a>
-            <a asp-area="" asp-controller="Applications" asp-action="Index"> <img src="~/images/plus.png"  alt="add-icon"/> Dodaj Produkt</a>
-            <a asp-area="" asp-controller="Proposal" asp-action="Index"> <img src="~/images/delivery-man.png"  alt="zamowienia-icon"/> Zamowienia</a>
+            <a asp-area="" asp-controller="Home" asp-action="Statystyki"> <img src="~/images/pie-graph.png" alt="wykres-icon" /> Statystyki</a>
+            <a asp-area="" asp-controller="Home" asp-action="DodajProdukt"> <img src="~/images/plus.png" alt="add-icon" /> Dodaj Produkt</a>
+            <a asp-area="" asp-controller="Home" asp-action="Zamowienia"> <img src="~/images/delivery-man.png" alt="zamowienia-icon" /> Zamowienia</a>
             <div class="user-info">
                 <p>Zalogowany: User</p>
                 <a asp-area="" asp-controller="#" asp-action="Index"><img src="~/images/export.png" alt="logout-icon" /> Wyloguj</a>
