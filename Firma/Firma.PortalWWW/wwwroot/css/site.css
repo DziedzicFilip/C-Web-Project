@@ -57,4 +57,11 @@ footer {
         footer a:hover {
             color: #ECECEC; 
         }
-
+.carousel-item img{
+    height:300px;
+}
+.index-section {
+    background-color: #f6c466;
+    padding: 20px;
+    border-radius:2px;
+}

@@ -1,10 +1,10 @@
-﻿
-@{
-    ViewData["Title"] = "Przeglad";
+﻿@{
+    ViewData["Title"] = "Przegląd";
 }
 
 <div class="container mt-4">
     <div class="row">
+   
         <div class="col-lg-2 col-md-12 mb-4 me-3 box-shadow sort rounded-3 bg-light p-4">
             <h5 class="fw-bold mb-3">Opcje wyszukiwania i sortowania</h5>
             <div class="mb-4">
@@ -24,9 +24,9 @@
                 <label for="filter" class="form-label">Filtruj według</label>
                 <select id="filter" class="form-select">
                     <option value="">Wybierz kategorię...</option>
-                    <option value="category1">Kategoria 1</option>
-                    <option value="category2">Kategoria 2</option>
-                    <option value="category3">Kategoria 3</option>
+                    <option value="category1">Laptopy</option>
+                    <option value="category2">Smartfony</option>
+                    <option value="category3">Akcesoria</option>
                 </select>
             </div>
             <div class="d-flex justify-content-between">
@@ -34,71 +34,36 @@
                 <button class="btn btn-outline-secondary w-100">Wyczyść</button>
             </div>
         </div>
+
         <div class="col-lg-9 col-md-12">
             <div class="row g-4">
 
+ 
                 <div class="col-lg-3 col-md-6">
                     <div class="card h-100 shadow-sm rounded border-0">
-                        <img src="~/images/Products/monitor.png" class="card-img-top p-3" alt="Produkt 1">
+                        <img src="~/images/Products/monitor.png" class="card-img-top p-3" alt="Monitor">
                         <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Produkt 1</h5>
-                            <p class="card-text text-muted mb-2">Opis produktu 1</p>
+                            <h5 class="card-title fw-bold">Monitor UltraWide LG</h5>
+                            <p class="card-text text-muted mb-2">Idealny do pracy i rozrywki.</p>
                             <p><strong>Ilość:</strong> 10 szt.</p>
-                            <p><strong>Cena:</strong> $100</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card h-100 shadow-sm rounded border-0">
-                        <img src="~/images/Products/myszka.png" class="card-img-top p-3" alt="Produkt 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Produkt 2</h5>
-                            <p class="card-text text-muted mb-2">Opis produktu 1</p>
-                            <p><strong>Ilość:</strong> 10 szt.</p>
-                            <p><strong>Cena:</strong> $100</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card h-100 shadow-sm rounded border-0">
-                        <img src="~/images/Products/telfon.png" class="card-img-top p-3" alt="Produkt 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Produkt 2</h5>
-                            <p class="card-text text-muted mb-2">Opis produktu 1</p>
-                            <p><strong>Ilość:</strong> 10 szt.</p>
-                            <p><strong>Cena:</strong> $100</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card h-100 shadow-sm rounded border-0">
-                        <img src="~/images/Products/telefon2.png" class="card-img-top p-3" alt="Produkt 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Produkt 2</h5>
-                            <p class="card-text text-muted mb-2">Opis produktu 1</p>
-                            <p><strong>Ilość:</strong> 10 szt.</p>
-                            <p><strong>Cena:</strong> $100</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card h-100 shadow-sm rounded border-0">
-                        <img src="~/images/Products/UTP_kabel.png" class="card-img-top p-3" alt="Produkt 1">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Produkt 2</h5>
-                            <p class="card-text text-muted mb-2">Opis produktu 1</p>
-                            <p><strong>Ilość:</strong> 10 szt.</p>
-                            <p><strong>Cena:</strong> $100</p>
-
+                            <p><strong>Cena:</strong> 1 299 zł</p>
+                            <a href="#" class="btn btn-primary w-100 mt-2">Dodaj do koszyka</a>
                         </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
+   
+                <div class="col-lg-3 col-md-6">
+                    <div class="card h-100 shadow-sm rounded border-0">
+                        <img src="~/images/Products/myszka.png" class="card-img-top p-3" alt="Myszka Gamingowa">
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">Myszka Gamingowa Razer</h5>
+                            <p class="card-text text-muted mb-2">Precyzja dla graczy.</p>
+                            <p><strong>Ilość:</strong> 20 szt.</p>
+                            <p><strong>Cena:</strong> 249 zł</p>
+                            <a href="#" class="btn btn-primary w-100 mt-2">Dodaj do koszyka</a>
+                        </div>
+                    </div>
+                </div>
 </div>
+    
