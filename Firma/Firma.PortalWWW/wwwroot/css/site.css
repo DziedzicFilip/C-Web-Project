@@ -58,10 +58,30 @@ footer {
             color: #ECECEC; 
         }
 .carousel-item img{
-    height:300px;
+    height:400px;
 }
 .index-section {
-    background-color: #f6c466;
+    background-color: rgba(64, 64, 64, .2);
     padding: 20px;
-    border-radius:2px;
+    border-radius: 10px;
+}
+.index-section img {
+    height:200px;
+    width:200px;
+    margin:auto;
+}
+    .index-section a {
+        background-color: #F5AA1C;
+        border: none;
+        color:rgba(64, 64, 64, .9);
+        font-weight: bold;
+    }
+.hit {
+    background-color: rgba(64, 64, 64, .2);
+    border-radius:10px;
+    margin-top:5%;
+}
+#stara_cena {
+    background-color: rgba(64, 64, 64, .2);
+    border-radius: 10px;
 }
