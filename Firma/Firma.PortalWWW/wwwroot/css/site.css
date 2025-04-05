@@ -61,7 +61,9 @@ footer {
 .carousel-item img{
     height:500px;
 }
-
+.carousel-item {
+    transition: opacity 1s ease-in-out;
+}
 .index-section {
     background-color: rgba(64, 64, 64, .2);
     padding: 20px;
