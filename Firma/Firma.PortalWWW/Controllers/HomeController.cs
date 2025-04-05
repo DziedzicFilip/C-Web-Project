@@ -25,6 +25,18 @@ namespace Firma.PortalWWW.Controllers
         public IActionResult Przeglad() {
             return View();
         }
+        public IActionResult Szczegoly()
+        {
+            return View();
+        }
+        public IActionResult Kontakt()
+        {
+            return View();
+        }
+        public IActionResult Regulamin()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

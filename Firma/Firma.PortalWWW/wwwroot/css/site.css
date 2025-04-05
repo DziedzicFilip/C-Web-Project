@@ -87,3 +87,12 @@ footer {
     background-color: rgba(64, 64, 64, .2);
     border-radius: 10px;
 }
+.przeglad a {
+    background-color: #F5AA1C;
+}
+.przeglad button  {
+    background-color: #F5AA1C;
+}
+.przeglad img{
+    height:200px;
+}
