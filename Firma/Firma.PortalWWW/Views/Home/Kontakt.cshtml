@@ -3,5 +3,67 @@
     ViewData["Title"] = "Kontakt";
 }
 
-<h1>Kontakt</h1>
+<div class="container mt-5">
+    <h1 class="fw-bold mb-4">Kontakt - Voltix</h1>
+    <p class="text-muted">
+        Skontaktuj się z nami, aby uzyskać więcej informacji na temat naszych usług, produktów lub rozwiązań dostosowanych do Twoich potrzeb. Jesteśmy tutaj, aby pomóc!
+    </p>
+
+
+    <div class="row mb-5">
+   
+        <div class="col-md-6 mb-4">
+            <div class="bg-light p-4 rounded shadow-sm">
+                <h5 class="fw-bold">Biuro w Londynie</h5>
+                <p>4th Floor, Silverstream House<br>45 Fitzroy Street, Fitzrovia<br>London, W1T 6EB</p>
+                <p><strong>Telefon:</strong> 0845 1800 999 / 020 3510 2016</p>
+                <p><strong>Email:</strong> helpdesk@voltixservices.com</p>
+                <p><strong>Godziny otwarcia:</strong><br>Poniedziałek – Czwartek: 9:00 - 17:00<br>Piątek: 9:00 - 16:00</p>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 mb-4">
+            <div class="bg-light p-4 rounded shadow-sm">
+                <h5 class="fw-bold">Biuro w West Sussex</h5>
+                <p>Unit 7, Stairbridge Court<br>Bolney Grange Business Park<br>Bolney, RH17 5PA</p>
+                <p><strong>Telefon:</strong> 0845 1800 999 / 020 3510 2016</p>
+                <p><strong>Email:</strong> sales@voltixservices.co.uk</p>
+                <p><strong>Godziny otwarcia:</strong><br>Poniedziałek – Czwartek: 9:00 - 17:00<br>Piątek: 9:00 - 16:00</p>
+            </div>
+        </div>
+    </div>
+
+
+    <form  class="bg-light p-4 rounded shadow-sm kontakt">
+        <h2 class="fw-bold mb-4">Formularz Kontaktowy</h2>
+
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Imię i nazwisko:</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Wpisz swoje imię i nazwisko" required />
+        </div>
+
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Adres e-mail:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Wpisz swój adres e-mail" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Numer telefonu:</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Wpisz swój numer telefonu (opcjonalnie)" />
+        </div>
+
+
+        <div class="mb-3">
+            <label for="message" class="form-label">Treść wiadomości:</label>
+            <textarea id="message" name="message" rows="5" class="form-control" placeholder="Wpisz swoją wiadomość..." required></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary w-100">Wyślij wiadomość</button>
+    </form>
+
+</div>
 

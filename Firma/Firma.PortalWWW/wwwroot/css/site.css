@@ -59,7 +59,7 @@ footer {
             color: #ECECEC; 
         }
 .carousel-item img{
-    height:400px;
+    height:500px;
 }
 
 .index-section {
@@ -96,3 +96,17 @@ footer {
 .przeglad img{
     height:200px;
 }
+.kontakt button {
+    border-color: none;
+    border: none;
+    color: #404040;
+    background-color: #F5AA1C;
+    margin: auto;
+}
+    .kontakt button:hover {
+        border-color: none;
+        border: none;
+        color: white;
+        background-color: #404040;
+        margin: auto;
+    }
