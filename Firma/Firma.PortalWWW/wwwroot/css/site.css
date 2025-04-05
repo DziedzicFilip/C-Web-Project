@@ -20,6 +20,7 @@ html {
 body {
     background-color: #ECECEC; 
     color: #404040; 
+    font-family:Bahnschrift;
 }
 
 .navbar {
@@ -60,6 +61,7 @@ footer {
 .carousel-item img{
     height:400px;
 }
+
 .index-section {
     background-color: rgba(64, 64, 64, .2);
     padding: 20px;
