@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-namespace Firma.PortalWWW.Models.Sklep
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Firma.Intranet.Models.Sklep
 {
     public class Towar
     {
@@ -21,6 +22,17 @@ namespace Firma.PortalWWW.Models.Sklep
         public required string FotoUrl { get; set; }
         public required string Opis { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Wymagana ilosc")]
+        [Display(Name = "Ilosc")]
+        public required int Ilosc { get; set; } = 0;
+
+
+        [ForeignKey("Rodzaj")]
+        public int idRodzaju { get; set; }
+        public Rodzaj? Rodzaj { get; set; }
+
+        public ICollection<Recenzja> Recenzje { get; set; } = new List<Recenzja>();
+        public ICollection<ZamowienieTowar> ZamowieniaTowary { get; set; } = new List<ZamowienieTowar>();
 
 
 

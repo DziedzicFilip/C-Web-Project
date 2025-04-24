@@ -1,0 +1,69 @@
+﻿@model Firma.Intranet.Models.Sklep.Zamowienie
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Zamowienie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DataZamowienia" class="control-label"></label>
+                <input asp-for="DataZamowienia" class="form-control" />
+                <span asp-validation-for="DataZamowienia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUzytkownika" class="control-label"></label>
+                <select asp-for="IdUzytkownika" class ="form-control" asp-items="ViewBag.IdUzytkownika"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ulica" class="control-label"></label>
+                <input asp-for="Ulica" class="form-control" />
+                <span asp-validation-for="Ulica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Miasto" class="control-label"></label>
+                <input asp-for="Miasto" class="form-control" />
+                <span asp-validation-for="Miasto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KodPocztowy" class="control-label"></label>
+                <input asp-for="KodPocztowy" class="form-control" />
+                <span asp-validation-for="KodPocztowy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kraj" class="control-label"></label>
+                <input asp-for="Kraj" class="form-control" />
+                <span asp-validation-for="Kraj" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CzyZrealizowane" /> @Html.DisplayNameFor(model => model.CzyZrealizowane)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CzyAnulowane" /> @Html.DisplayNameFor(model => model.CzyAnulowane)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SposobPlatnosci" class="control-label"></label>
+                <input asp-for="SposobPlatnosci" class="form-control" />
+                <span asp-validation-for="SposobPlatnosci" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

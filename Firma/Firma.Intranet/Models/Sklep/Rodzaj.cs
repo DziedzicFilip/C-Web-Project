@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Firma.PortalWWW.Models.Sklep
+namespace Firma.Intranet.Models.Sklep
 {
     public class Rodzaj
     {
@@ -10,6 +10,8 @@ namespace Firma.PortalWWW.Models.Sklep
         [Required(ErrorMessage = "Wymagana nazwa rodzaju")]
         [MaxLength(20, ErrorMessage = "Maksymalna długość to 20 znaków")]
         public required string Nazwa { get; set; }
+
+        public ICollection<Towar>? Towary { get; } = new List<Towar>();
 
 
     }
