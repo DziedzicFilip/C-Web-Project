@@ -1,10 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Firma.Intranet.Data;
+using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<FirmaIntranetContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FirmaIntranetContext") ?? throw new InvalidOperationException("Connection string 'FirmaIntranetContext' not found.")));
-
+// Ustawienie kultury
+var cultureInfo = new CultureInfo("pl-PL");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

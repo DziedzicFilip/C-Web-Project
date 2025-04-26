@@ -12,8 +12,8 @@ namespace Firma.Intranet.Models.Sklep
         [MaxLength(100)]
         public string Nazwa { get; set; } = string.Empty;
 
-        [Range(0, 1, ErrorMessage = "Rabat musi być między 0 a 1 (np. 0.2 = 20%")]
-        public decimal Rabat { get; set; }
+      
+        public double Rabat { get; set; }
 
         [Display(Name = "Data rozpoczęcia")]
         public DateTime DataRozpoczecia { get; set; }
