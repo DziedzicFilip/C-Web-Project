@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Firma.Intranet.Models.Sklep.ProduktPromocja>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Towar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Promocja)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Towar.Kod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Promocja.Nazwa)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdProduktyPromocji">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdProduktyPromocji">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdProduktyPromocji">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

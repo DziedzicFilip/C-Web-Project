@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Firma.Intranet.Models.CMS.Baner>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tytul)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zawartosc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UrlObrazka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPoczatkowa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataZakonczenia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CzyAktywny)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tytul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zawartosc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrlObrazka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPoczatkowa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataZakonczenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CzyAktywny)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdBanera">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdBanera">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdBanera">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

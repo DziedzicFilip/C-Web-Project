@@ -22,6 +22,9 @@ namespace Firma.Intranet.Data
         public DbSet<Firma.Intranet.Models.Sklep.Recenzja> Recenzja { get; set; } = default!;
         public DbSet<Firma.Intranet.Models.Sklep.Uzytkownik> Uzytkownik { get; set; } = default!;
         public DbSet<Firma.Intranet.Models.Sklep.Zamowienie> Zamowienie { get; set; } = default!;
+        public DbSet<Firma.Intranet.Models.CMS.Baner> Baner { get; set; } = default!;
+        public DbSet<Firma.Intranet.Models.Sklep.ProduktPromocja> ProduktPromocja { get; set; } = default!;
+        public DbSet<Firma.Intranet.Models.Sklep.Promocja> Promocja { get; set; } = default!;
         
     }
 }

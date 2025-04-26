@@ -14,6 +14,7 @@ namespace Firma.Intranet.Models.Sklep
         [Required(ErrorMessage = "Wymagany Kod")]
         public required string Kod { get; set; }
         [Required(ErrorMessage = "Wymagana Cena")]
+        [Range(0, double.MaxValue, ErrorMessage = "Cena musi być większa niż 0")]
         [Column(TypeName = "money")]
 
         public required decimal Cena { get; set; }
@@ -31,6 +32,7 @@ namespace Firma.Intranet.Models.Sklep
         public Rodzaj? Rodzaj { get; set; }
 
         public ICollection<Recenzja> Recenzje { get; set; } = new List<Recenzja>();
+        public ICollection<ProduktPromocja>? ProduktyPromocji { get; set; }
 
 
 
