@@ -4,12 +4,46 @@
     ViewData["Title"] = "Zamówienia";
 }
 
-<div class=" mt-4">
+<div class="mt-4" style="max-width: 1200px; margin: 0 auto;">
     <h2 class="fw-bold mb-2">Zamówienia</h2>
     <div class="mb-4">
         <a asp-action="Create" class="btn btn-success">
-            <i class="bi bi-plus-lg me-1"></i> Dodaj zamówienie
+            <i class="bi bi-plus-lg me-1">Dodaj nową</i>
         </a>
+    </div>
+
+
+    <div class="card shadow-sm border-0 mb-4" style="max-width: 1200px; margin: 0 auto;">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label for="search" class="form-label mb-1">Szukaj po kliencie lub płatności</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz email klienta lub sposób płatności..." />
+                </div>
+                <div class="col-md-3">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Data najnowsze</option>
+                        <option>Data najstarsze</option>
+                        <option>Status A-Z</option>
+                        <option>Status Z-A</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="status" class="form-label mb-1">Status</label>
+                    <select id="status" class="form-select">
+                        <option>Wszystkie</option>
+                        <option>Zrealizowane</option>
+                        <option>Anulowane</option>
+                        <option>Oczekujące</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="table-responsive shadow-sm rounded-3">
         <table class="table table-hover align-middle mb-0">
@@ -19,15 +53,14 @@
                     <th>Klient</th>
                     <th>Status</th>
                     <th>Płatność</th>
-    
-                    <th>Akcje</th>
+                    <th class="text-end">Akcje</th>
                 </tr>
             </thead>
             <tbody>
                 @if (!Model.Any())
                 {
                     <tr>
-                        <td colspan="10" class="text-center text-muted py-4">
+                        <td colspan="5" class="text-center text-muted py-4">
                             Brak zamówień do wyświetlenia.
                         </td>
                     </tr>
@@ -39,8 +72,6 @@
                         <tr>
                             <td>@item.DataZamowienia.ToString("yyyy-MM-dd")</td>
                             <td>@item.Uzytkownik?.Email</td>
-                          
-                         
                             <td>
                                 @if (item.CzyAnulowane)
                                 {
@@ -56,16 +87,15 @@
                                 }
                             </td>
                             <td>@item.SposobPlatnosci</td>
-          
                             <td class="text-end">
                                 <a asp-action="Details" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
-                                    <i class="bi bi-eye">Edytuj</i>
+                                    <i class="bi bi-eye"></i> Szczegóły
                                 </a>
                                 <a asp-action="Edit" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
-                                    <i class="bi bi-pencil">Szczegóły</i>
+                                    <i class="bi bi-pencil"></i> Edytuj
                                 </a>
                                 <a asp-action="Delete" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-outline-danger" title="Usuń">
-                                    <i class="bi bi-trash">Usuń</i>
+                                    <i class="bi bi-trash"></i> Usuń
                                 </a>
                             </td>
                         </tr>

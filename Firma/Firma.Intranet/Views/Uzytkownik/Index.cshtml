@@ -4,13 +4,42 @@
     ViewData["Title"] = "Lista użytkowników";
 }
 
-<div class=" mt-4">
-    <h2 class="fw-bold mb-2">Lista użytkowników</h2>
-    <div class="mb-4">
-        <a asp-action="Create" class="btn btn-success">
-            <i class="bi bi-plus-lg me-1"></i> Dodaj użytkownika
-        </a>
+
+    <div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+        <h2 class="fw-bold mb-2">Lista stron</h2>
+        <div class="mb-4">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-lg me-1">Dodaj użytkownika</i>
+            </a>
+        </div>
+
+  
+    <div class="card shadow-sm border-0 mb-4" style="max-width: 1500px; margin: 0 auto;">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label for="search" class="form-label mb-1">Szukaj po imieniu, nazwisku lub emailu</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz imię, nazwisko lub email..." />
+                </div>
+                <div class="col-md-4">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Imię A-Z</option>
+                        <option>Imię Z-A</option>
+                        <option>Nazwisko A-Z</option>
+                        <option>Nazwisko Z-A</option>
+                        <option>Email A-Z</option>
+                        <option>Email Z-A</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
     </div>
+
     <div class="d-flex justify-content-center">
         <div class="table-responsive shadow-sm rounded-3" style="max-width:1500px; width:100%;">
             <table class="table table-hover align-middle mb-0">
@@ -41,13 +70,13 @@
                                 <td>@item.Email</td>
                                 <td class="text-end">
                                     <a asp-action="Edit" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
-                                        <i class="bi bi-pencil">Edytuj</i>
+                                        <i class="bi bi-pencil"></i> Edytuj
                                     </a>
                                     <a asp-action="Details" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
-                                        <i class="bi bi-eye">Szczegóły</i>
+                                        <i class="bi bi-eye"></i> Szczegóły
                                     </a>
                                     <a asp-action="Delete" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-danger" title="Usuń">
-                                        <i class="bi bi-trash">Usuń</i>
+                                        <i class="bi bi-trash"></i> Usuń
                                     </a>
                                 </td>
                             </tr>

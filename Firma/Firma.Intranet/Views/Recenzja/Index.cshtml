@@ -5,12 +5,53 @@
 }
 
 <div class=" mt-4">
-    <h2 class="fw-bold mb-2">Recenzje</h2>
-    <div class="mb-4">
-        <a asp-action="Create" class="btn btn-success">
-            <i class="bi bi-plus-lg me-1"></i> Dodaj recenzję
-        </a>
-    </div>
+    <div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+        <h2 class="fw-bold mb-2">Recenzje</h2>
+        <div class="mb-4">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-lg me-1">Dodaj Recenzje</i>
+            </a>
+        </div>
+
+
+        <div class="card shadow-sm border-0 mb-4" style="max-width: 1500px; margin: 0 auto;">
+            <div class="card-body">
+                <form class="row g-2 align-items-end">
+                    <div class="col-md-3">
+                        <label for="search" class="form-label mb-1">Szukaj w komentarzu</label>
+                        <input type="text" id="search" class="form-control" placeholder="Wpisz fragment komentarza..." />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="ocena" class="form-label mb-1">Ocena</label>
+                        <select id="ocena" class="form-select">
+                            <option>Wszystkie</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="sort" class="form-label mb-1">Sortuj według</label>
+                        <select id="sort" class="form-select">
+                            <option>Domyślnie</option>
+                            <option>Ocena rosnąco</option>
+                            <option>Ocena malejąco</option>
+                            <option>Data najnowsze</option>
+                            <option>Data najstarsze</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="towar" class="form-label mb-1">Towar</label>
+                        <input type="text" id="towar" class="form-control" placeholder="Nazwa towaru..." />
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     <div class="table-responsive shadow-sm rounded-3">
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">

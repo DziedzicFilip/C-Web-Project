@@ -4,13 +4,43 @@
     ViewData["Title"] = "Lista stron";
 }
 
-<div class=" mt-4">
+<div class="mt-4" style="max-width: 1200px; margin: 0 auto;">
     <h2 class="fw-bold mb-2">Lista stron</h2>
     <div class="mb-4">
         <a asp-action="Create" class="btn btn-success">
             <i class="bi bi-plus-lg me-1"></i> Dodaj nową
         </a>
     </div>
+
+    
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label for="search" class="form-label mb-1">Szukaj w tytule lub treści</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz frazę..." />
+                </div>
+                <div class="col-md-3">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Tytuł A-Z</option>
+                        <option>Tytuł Z-A</option>
+                        <option>Pozycja rosnąco</option>
+                        <option>Pozycja malejąco</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="pozycja" class="form-label mb-1">Pozycja</label>
+                    <input type="number" id="pozycja" class="form-control" placeholder="np. 1" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-center">
         <div class="table-responsive shadow-sm rounded-3" style="max-width:1500px; width:100%;">
             <table class="table table-hover align-middle mb-0">
@@ -49,13 +79,13 @@
                                 </td>
                                 <td class="text-end">
                                     <a asp-action="Edit" asp-route-id="@item.IdStrony" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
-                                        <i class="bi bi-pencil">Edytuj</i>
+                                        <i class="bi bi-pencil"></i> Edytuj
                                     </a>
                                     <a asp-action="Details" asp-route-id="@item.IdStrony" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
-                                        <i class="bi bi-eye">Szczegóły</i>
+                                        <i class="bi bi-eye"></i> Szczegóły
                                     </a>
                                     <a asp-action="Delete" asp-route-id="@item.IdStrony" class="btn btn-sm btn-outline-danger" title="Usuń">
-                                        <i class="bi bi-trash">Usuń</i>
+                                        <i class="bi bi-trash"></i> Usuń
                                     </a>
                                 </td>
                             </tr>
