@@ -17,9 +17,8 @@ namespace Firma.Intranet.Models.Sklep
         [Column(TypeName = "money")]
 
         public required decimal Cena { get; set; }
-        [Required(ErrorMessage = "Wymagany link do zdjecia")]
         [Display(Name = "Link do zdjecia")]
-        public required string FotoUrl { get; set; }
+        public string? FotoUrl { get; set; }
         public required string Opis { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Wymagana ilosc")]
