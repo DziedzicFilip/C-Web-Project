@@ -1,45 +1,45 @@
 ﻿@model Firma.Intranet.Models.CMS.Strona
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj stronę";
 }
 
-<h1>Create</h1>
+<div class="mt-4">
+    <h2 class="mb-4 fw-bold">Dodaj nową stronę</h2>
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>Strona</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="LinkTytul" class="control-label"></label>
-                <input asp-for="LinkTytul" class="form-control" />
-                <span asp-validation-for="LinkTytul" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tytul" class="control-label"></label>
-                <input asp-for="Tytul" class="form-control" />
-                <span asp-validation-for="Tytul" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tres" class="control-label"></label>
-                <input asp-for="Tres" class="form-control" />
-                <span asp-validation-for="Tres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pozycja" class="control-label"></label>
-                <input asp-for="Pozycja" class="form-control" />
-                <span asp-validation-for="Pozycja" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="LinkTytul" class="form-label"></label>
+                    <input asp-for="LinkTytul" class="form-control" placeholder="Wpisz tytuł linku..." />
+                    <span asp-validation-for="LinkTytul" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Tytul" class="form-label"></label>
+                    <input asp-for="Tytul" class="form-control" placeholder="Wpisz tytuł strony..." />
+                    <span asp-validation-for="Tytul" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Tres" class="form-label"></label>
+                    <textarea asp-for="Tres" class="form-control" rows="6" placeholder="Wpisz treść strony..."></textarea>
+                    <span asp-validation-for="Tres" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Pozycja" class="form-label"></label>
+                    <input asp-for="Pozycja" class="form-control" placeholder="Podaj pozycję (np. 1, 2, 3...)" />
+                    <span asp-validation-for="Pozycja" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-primary w-100 me-2">Dodaj stronę</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary w-100">Powrót</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
