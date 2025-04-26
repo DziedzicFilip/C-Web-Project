@@ -1,58 +1,67 @@
 ﻿@model Firma.Intranet.Models.CMS.Baner
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj baner";
 }
 
-<h1>Create</h1>
+<div class="mt-4" style="max-width: 600px; margin: 0 auto;">
+    <h2 class="mb-4 fw-bold">Dodaj baner</h2>
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>Baner</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Tytul" class="control-label"></label>
-                <input asp-for="Tytul" class="form-control" />
-                <span asp-validation-for="Tytul" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Zawartosc" class="control-label"></label>
-                <input asp-for="Zawartosc" class="form-control" />
-                <span asp-validation-for="Zawartosc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UrlObrazka" class="control-label"></label>
-                <input asp-for="UrlObrazka" class="form-control" />
-                <span asp-validation-for="UrlObrazka" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataPoczatkowa" class="control-label"></label>
-                <input asp-for="DataPoczatkowa" class="form-control" />
-                <span asp-validation-for="DataPoczatkowa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataZakonczenia" class="control-label"></label>
-                <input asp-for="DataZakonczenia" class="form-control" />
-                <span asp-validation-for="DataZakonczenia" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CzyAktywny" /> @Html.DisplayNameFor(model => model.CzyAktywny)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="Tytul" class="form-label"></label>
+                    <input asp-for="Tytul" class="form-control" placeholder="Wpisz tytuł banera..." />
+                    <span asp-validation-for="Tytul" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Zawartosc" class="form-label"></label>
+                    <textarea asp-for="Zawartosc" class="form-control" rows="4" placeholder="Wpisz treść banera..."></textarea>
+                    <span asp-validation-for="Zawartosc" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="UrlObrazka" class="form-label"></label>
+                    <input asp-for="UrlObrazka" class="form-control" placeholder="Wklej URL obrazka..." />
+                    <span asp-validation-for="UrlObrazka" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DataPoczatkowa" class="form-label"></label>
+                    <input asp-for="DataPoczatkowa" class="form-control" type="date" />
+                    <span asp-validation-for="DataPoczatkowa" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DataZakonczenia" class="form-label"></label>
+                    <input asp-for="DataZakonczenia" class="form-control" type="date" />
+                    <span asp-validation-for="DataZakonczenia" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="CzyAktywny" />
+                    <label class="form-check-label" asp-for="CzyAktywny">
+                        @Html.DisplayNameFor(model => model.CzyAktywny)
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success w-100 me-2">Dodaj baner</button>
+                    <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

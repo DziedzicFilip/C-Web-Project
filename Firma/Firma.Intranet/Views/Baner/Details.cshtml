@@ -1,54 +1,59 @@
 ﻿@model Firma.Intranet.Models.CMS.Baner
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły banera";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Baner</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tytul)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tytul)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Zawartosc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Zawartosc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UrlObrazka)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UrlObrazka)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataPoczatkowa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataPoczatkowa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataZakonczenia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataZakonczenia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CzyAktywny)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CzyAktywny)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdBanera">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold mb-4 text-primary">
+                        Szczegóły banera
+                    </h2>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 text-muted">Tytuł</dt>
+                        <dd class="col-sm-8">@Model.Tytul</dd>
+                        <dt class="col-sm-4 text-muted">Zawartość</dt>
+                        <dd class="col-sm-8">@Model.Zawartosc</dd>
+                        <dt class="col-sm-4 text-muted">Obrazek</dt>
+                        <dd class="col-sm-8">
+                            @if (!string.IsNullOrEmpty(Model.UrlObrazka))
+                            {
+                                <img src="@Model.UrlObrazka" alt="Obrazek" style="max-width: 120px; max-height: 80px; object-fit: contain; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">Brak</span>
+                            }
+                        </dd>
+                        <dt class="col-sm-4 text-muted">Data początkowa</dt>
+                        <dd class="col-sm-8">@Model.DataPoczatkowa.ToString("yyyy-MM-dd")</dd>
+                        <dt class="col-sm-4 text-muted">Data zakończenia</dt>
+                        <dd class="col-sm-8">@Model.DataZakonczenia.ToString("yyyy-MM-dd")</dd>
+                        <dt class="col-sm-4 text-muted">Status</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.CzyAktywny)
+                            {
+                                <span class="badge bg-success">Aktywny</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Nieaktywny</span>
+                            }
+                        </dd>
+                    </dl>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@Model?.IdBanera" class="btn btn-outline-primary w-100 me-2">
+                            <i class="bi bi-pencil"></i> Edytuj
+                        </a>
+                        <a asp-action="Index" class="btn btn-primary w-100">
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,65 +1,105 @@
 ﻿@model IEnumerable<Firma.Intranet.Models.CMS.Baner>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Banery";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Tytul)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Zawartosc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UrlObrazka)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPoczatkowa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataZakonczenia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CzyAktywny)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tytul)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zawartosc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UrlObrazka)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPoczatkowa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataZakonczenia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CzyAktywny)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdBanera">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdBanera">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdBanera">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+        <h2 class="fw-bold mb-2">Lista stron</h2>
+        <div class="mb-4">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-lg me-1">Dodaj baner</i>
+            </a>
+        </div>
+
+    <div class="card shadow-sm border-0 mb-4" style="max-width: 1500px; margin: 0 auto;">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label for="search" class="form-label mb-1">Szukaj po tytule lub treści</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz frazę..." />
+                </div>
+                <div class="col-md-3">
+                    <label for="aktywny" class="form-label mb-1">Status</label>
+                    <select id="aktywny" class="form-select">
+                        <option>Wszystkie</option>
+                        <option>Aktywne</option>
+                        <option>Nieaktywne</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Tytuł A-Z</option>
+                        <option>Tytuł Z-A</option>
+                        <option>Data od najnowszych</option>
+                        <option>Data od najstarszych</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 16%;">Tytuł</th>
+                    <th style="width: 12%;">Od</th>
+                    <th style="width: 12%;">Do</th>
+                    <th style="width: 10%;">Status</th>
+                    <th style="width: 14%;" class="text-end">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            Brak banerów do wyświetlenia.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Tytul</td>
+                          
+                          
+                            <td>@item.DataPoczatkowa.ToString("yyyy-MM-dd")</td>
+                            <td>@item.DataZakonczenia.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                @if (item.CzyAktywny)
+                                {
+                                    <span class="badge bg-success">Aktywny</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Nieaktywny</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.IdBanera" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil"></i> Edytuj
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.IdBanera" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                    <i class="bi bi-eye"></i> Szczegóły
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdBanera" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash"></i> Usuń
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
