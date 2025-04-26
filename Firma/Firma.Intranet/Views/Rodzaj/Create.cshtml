@@ -1,30 +1,25 @@
 ﻿@model Firma.Intranet.Models.Sklep.Rodzaj
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj rodzaj";
 }
 
-<h1>Create</h1>
-
-<h4>Rodzaj</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nazwa" class="control-label"></label>
-                <input asp-for="Nazwa" class="form-control" />
-                <span asp-validation-for="Nazwa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="mt-4">
+    <h2 class="mb-4 fw-bold">Dodaj nowy rodzaj</h2>
+    <div class="card shadow-sm border-0" style="max-width: 400px; margin: 0 auto;">
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <div class="mb-3">
+                    <label asp-for="Nazwa" class="form-label"></label>
+                    <input asp-for="Nazwa" class="form-control" placeholder="Wpisz nazwę rodzaju..." />
+                    <span asp-validation-for="Nazwa" class="text-danger"></span>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success w-100 me-2">Dodaj rodzaj</button>
+                    <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
