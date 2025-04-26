@@ -216,7 +216,13 @@ namespace Firma.Intranet.Migrations
                     b.Property<DateTime>("DataZamowienia")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdTowaru")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdUzytkownika")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Ilosc")
                         .HasColumnType("int");
 
                     b.Property<string>("KodPocztowy")
@@ -241,35 +247,11 @@ namespace Firma.Intranet.Migrations
 
                     b.HasKey("IdZamowienia");
 
+                    b.HasIndex("IdTowaru");
+
                     b.HasIndex("IdUzytkownika");
 
                     b.ToTable("Zamowienie");
-                });
-
-            modelBuilder.Entity("Firma.Intranet.Models.Sklep.ZamowienieTowar", b =>
-                {
-                    b.Property<int>("IdZamowienieTowar")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdZamowienieTowar"));
-
-                    b.Property<int>("IdTowaru")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdZamowienia")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Ilosc")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdZamowienieTowar");
-
-                    b.HasIndex("IdTowaru");
-
-                    b.HasIndex("IdZamowienia");
-
-                    b.ToTable("ZamowienieTowar");
                 });
 
             modelBuilder.Entity("Firma.Intranet.Models.Sklep.Recenzja", b =>
@@ -304,32 +286,21 @@ namespace Firma.Intranet.Migrations
 
             modelBuilder.Entity("Firma.Intranet.Models.Sklep.Zamowienie", b =>
                 {
+                    b.HasOne("Firma.Intranet.Models.Sklep.Towar", "Towar")
+                        .WithMany()
+                        .HasForeignKey("IdTowaru")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Firma.Intranet.Models.Sklep.Uzytkownik", "Uzytkownik")
                         .WithMany("Zamowienia")
                         .HasForeignKey("IdUzytkownika")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Uzytkownik");
-                });
-
-            modelBuilder.Entity("Firma.Intranet.Models.Sklep.ZamowienieTowar", b =>
-                {
-                    b.HasOne("Firma.Intranet.Models.Sklep.Towar", "Towar")
-                        .WithMany("ZamowieniaTowary")
-                        .HasForeignKey("IdTowaru")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Firma.Intranet.Models.Sklep.Zamowienie", "Zamowienie")
-                        .WithMany("ZamowieniaTowary")
-                        .HasForeignKey("IdZamowienia")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Towar");
 
-                    b.Navigation("Zamowienie");
+                    b.Navigation("Uzytkownik");
                 });
 
             modelBuilder.Entity("Firma.Intranet.Models.Sklep.Rodzaj", b =>
@@ -340,8 +311,6 @@ namespace Firma.Intranet.Migrations
             modelBuilder.Entity("Firma.Intranet.Models.Sklep.Towar", b =>
                 {
                     b.Navigation("Recenzje");
-
-                    b.Navigation("ZamowieniaTowary");
                 });
 
             modelBuilder.Entity("Firma.Intranet.Models.Sklep.Uzytkownik", b =>
@@ -349,11 +318,6 @@ namespace Firma.Intranet.Migrations
                     b.Navigation("Recenzje");
 
                     b.Navigation("Zamowienia");
-                });
-
-            modelBuilder.Entity("Firma.Intranet.Models.Sklep.Zamowienie", b =>
-                {
-                    b.Navigation("ZamowieniaTowary");
                 });
 #pragma warning restore 612, 618
         }

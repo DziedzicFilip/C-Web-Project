@@ -39,10 +39,14 @@ namespace Firma.Intranet.Models.Sklep
         [Display(Name = "Spobosb Platności")]
         public string SposobPlatnosci { get; set; } = string.Empty;
 
-        
+        // Nowe właściwości
+        [Required]
+        public int IdTowaru { get; set; }
 
+        [ForeignKey(nameof(IdTowaru))]
+        public Towar? Towar { get; set; }
 
-        public ICollection<ZamowienieTowar> ZamowieniaTowary { get; set; } = new List<ZamowienieTowar>();
+        [Required(ErrorMessage = "Wymagana ilość")]
+        public int Ilosc { get; set; }
     }
-
 }

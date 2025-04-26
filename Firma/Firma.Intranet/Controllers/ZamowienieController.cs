@@ -22,7 +22,7 @@ namespace Firma.Intranet.Controllers
         // GET: Zamowienie
         public async Task<IActionResult> Index()
         {
-            var firmaIntranetContext = _context.Zamowienie.Include(z => z.Uzytkownik);
+            var firmaIntranetContext = _context.Zamowienie.Include(z => z.Towar).Include(z => z.Uzytkownik);
             return View(await firmaIntranetContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace Firma.Intranet.Controllers
             }
 
             var zamowienie = await _context.Zamowienie
+                .Include(z => z.Towar)
                 .Include(z => z.Uzytkownik)
                 .FirstOrDefaultAsync(m => m.IdZamowienia == id);
             if (zamowienie == null)
@@ -48,6 +49,7 @@ namespace Firma.Intranet.Controllers
         // GET: Zamowienie/Create
         public IActionResult Create()
         {
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Nazwa");
             ViewData["IdUzytkownika"] = new SelectList(_context.Uzytkownik, "IdUzytkownika", "Email");
             return View();
         }
@@ -57,7 +59,7 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdZamowienia,DataZamowienia,IdUzytkownika,Ulica,Miasto,KodPocztowy,Kraj,CzyZrealizowane,CzyAnulowane,SposobPlatnosci")] Zamowienie zamowienie)
+        public async Task<IActionResult> Create([Bind("IdZamowienia,DataZamowienia,IdUzytkownika,Ulica,Miasto,KodPocztowy,Kraj,CzyZrealizowane,CzyAnulowane,SposobPlatnosci,IdTowaru,Ilosc")] Zamowienie zamowienie)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +67,7 @@ namespace Firma.Intranet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Kod", zamowienie.IdTowaru);
             ViewData["IdUzytkownika"] = new SelectList(_context.Uzytkownik, "IdUzytkownika", "Email", zamowienie.IdUzytkownika);
             return View(zamowienie);
         }
@@ -82,6 +85,7 @@ namespace Firma.Intranet.Controllers
             {
                 return NotFound();
             }
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Kod", zamowienie.IdTowaru);
             ViewData["IdUzytkownika"] = new SelectList(_context.Uzytkownik, "IdUzytkownika", "Email", zamowienie.IdUzytkownika);
             return View(zamowienie);
         }
@@ -91,7 +95,7 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdZamowienia,DataZamowienia,IdUzytkownika,Ulica,Miasto,KodPocztowy,Kraj,CzyZrealizowane,CzyAnulowane,SposobPlatnosci")] Zamowienie zamowienie)
+        public async Task<IActionResult> Edit(int id, [Bind("IdZamowienia,DataZamowienia,IdUzytkownika,Ulica,Miasto,KodPocztowy,Kraj,CzyZrealizowane,CzyAnulowane,SposobPlatnosci,IdTowaru,Ilosc")] Zamowienie zamowienie)
         {
             if (id != zamowienie.IdZamowienia)
             {
@@ -118,6 +122,7 @@ namespace Firma.Intranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Kod", zamowienie.IdTowaru);
             ViewData["IdUzytkownika"] = new SelectList(_context.Uzytkownik, "IdUzytkownika", "Email", zamowienie.IdUzytkownika);
             return View(zamowienie);
         }
@@ -131,6 +136,7 @@ namespace Firma.Intranet.Controllers
             }
 
             var zamowienie = await _context.Zamowienie
+                .Include(z => z.Towar)
                 .Include(z => z.Uzytkownik)
                 .FirstOrDefaultAsync(m => m.IdZamowienia == id);
             if (zamowienie == null)

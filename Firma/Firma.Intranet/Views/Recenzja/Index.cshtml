@@ -1,59 +1,66 @@
 ﻿@model IEnumerable<Firma.Intranet.Models.Sklep.Recenzja>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Recenzje";
 }
 
-<h1>Index</h1>
+<div class=" mt-4">
+    <h2 class="fw-bold mb-2">Recenzje</h2>
+    <div class="mb-4">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Dodaj recenzję
+        </a>
+    </div>
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 7%;">Ocena</th>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ocena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Komentarz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDodania)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Towar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Uzytkownik)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ocena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Komentarz)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDodania)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Towar.FotoUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Uzytkownik.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdRecenzji">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdRecenzji">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdRecenzji">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    <th style="width: 13%;">Data dodania</th>
+                    <th style="width: 18%;">Towar</th>
+                    <th style="width: 18%;">Użytkownik</th>
+                    <th style="width: 14%;" class="text-end">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            Brak recenzji do wyświetlenia.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <span class="badge bg-primary fs-6">@item.Ocena</span>
+                            </td>
+                            
+                            <td>@item.DataDodania.ToString("yyyy-MM-dd")</td>
+                            <td>
+                               @item.Towar.Nazwa
+                            </td>
+                            <td>@item.Uzytkownik?.Email</td>
+                            <td class="text-end">
+                                <a asp-action="Details" asp-route-id="@item.IdRecenzji" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                    <i class="bi bi-eye">Edycja</i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.IdRecenzji" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil">Szczegóły</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdRecenzji" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash">Usuń</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

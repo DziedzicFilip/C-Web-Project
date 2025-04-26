@@ -49,7 +49,7 @@ namespace Firma.Intranet.Controllers
         // GET: Recenzja/Create
         public IActionResult Create()
         {
-            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "FotoUrl");
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Nazwa");
             ViewData["IdUzytkownika"] = new SelectList(_context.Set<Uzytkownik>(), "IdUzytkownika", "Email");
             return View();
         }
@@ -67,7 +67,7 @@ namespace Firma.Intranet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "FotoUrl", recenzja.IdTowaru);
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Nazwa", recenzja.IdTowaru);
             ViewData["IdUzytkownika"] = new SelectList(_context.Set<Uzytkownik>(), "IdUzytkownika", "Email", recenzja.IdUzytkownika);
             return View(recenzja);
         }
@@ -85,7 +85,7 @@ namespace Firma.Intranet.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "FotoUrl", recenzja.IdTowaru);
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Nazwa", recenzja.IdTowaru);
             ViewData["IdUzytkownika"] = new SelectList(_context.Set<Uzytkownik>(), "IdUzytkownika", "Email", recenzja.IdUzytkownika);
             return View(recenzja);
         }
@@ -122,7 +122,7 @@ namespace Firma.Intranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "FotoUrl", recenzja.IdTowaru);
+            ViewData["IdTowaru"] = new SelectList(_context.Towar, "idTowar", "Nazwa", recenzja.IdTowaru);
             ViewData["IdUzytkownika"] = new SelectList(_context.Set<Uzytkownik>(), "IdUzytkownika", "Email", recenzja.IdUzytkownika);
             return View(recenzja);
         }

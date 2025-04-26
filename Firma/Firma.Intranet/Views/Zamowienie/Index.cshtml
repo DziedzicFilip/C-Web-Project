@@ -4,86 +4,74 @@
     ViewData["Title"] = "Zamówienia";
 }
 
-<div class="mt-4">
-    <h2 class="mb-4 fw-bold">Zamówienia</h2>
+<div class=" mt-4">
+    <h2 class="fw-bold mb-2">Zamówienia</h2>
     <div class="mb-4">
         <a asp-action="Create" class="btn btn-success">
             <i class="bi bi-plus-lg me-1"></i> Dodaj zamówienie
         </a>
     </div>
-
-    <div class="row mb-4">
-        <div class="col-lg-3 col-md-6 mb-3">
-            <label for="searchOrder" class="form-label">Szukaj zamówienia</label>
-            <input type="text" id="searchOrder" class="form-control" placeholder="Wpisz ID zamówienia lub email klienta...">
-            <button class="btn btn-primary mt-3 w-100">Szukaj</button>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-3">
-            <label for="filterStatus" class="form-label">Filtruj według statusu</label>
-            <select id="filterStatus" class="form-select">
-                <option value="">Wszystkie</option>
-                <option value="pending">Oczekujące</option>
-                <option value="completed">Zrealizowane</option>
-                <option value="cancelled">Anulowane</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="card shadow-sm border-0">
-        <div class="card-body">
-            <table class="table table-striped table-hover align-middle">
-                <thead>
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Data</th>
+                    <th>Klient</th>
+                    <th>Status</th>
+                    <th>Płatność</th>
+    
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
                     <tr>
-                        <th>#</th>
-                        <th>ID Zamówienia</th>
-                        <th>Klient (Email)</th>
-                        <th>Data Zamówienia</th>
-                        <th>Status</th>
-                        <th>Akcje</th>
+                        <td colspan="10" class="text-center text-muted py-4">
+                            Brak zamówień do wyświetlenia.
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @if (!Model.Any())
+                }
+                else
+                {
+                    foreach (var item in Model)
                     {
                         <tr>
-                            <td colspan="6" class="text-center text-muted py-4">Brak zamówień do wyświetlenia.</td>
+                            <td>@item.DataZamowienia.ToString("yyyy-MM-dd")</td>
+                            <td>@item.Uzytkownik?.Email</td>
+                          
+                         
+                            <td>
+                                @if (item.CzyAnulowane)
+                                {
+                                    <span class="badge bg-danger">Anulowane</span>
+                                }
+                                else if (item.CzyZrealizowane)
+                                {
+                                    <span class="badge bg-success">Zrealizowane</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">Oczekujące</span>
+                                }
+                            </td>
+                            <td>@item.SposobPlatnosci</td>
+          
+                            <td class="text-end">
+                                <a asp-action="Details" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                    <i class="bi bi-eye">Edytuj</i>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil">Szczegóły</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash">Usuń</i>
+                                </a>
+                            </td>
                         </tr>
                     }
-                    else
-                    {
-                        var index = 1;
-                        foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@index</td>
-                                <td>@item.IdZamowienia</td>
-                                <td>@item.Uzytkownik.Email</td>
-                                <td>@item.DataZamowienia.ToString("yyyy-MM-dd")</td>
-                                <td>
-                                    @if (item.CzyAnulowane)
-                                    {
-                                        <span class="badge bg-danger">Anulowane</span>
-                                    }
-                                    else if (item.CzyZrealizowane)
-                                    {
-                                        <span class="badge bg-success">Zrealizowane</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-warning text-dark">Oczekujące</span>
-                                    }
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-primary me-1">Edytuj</a>
-                                    <a asp-action="Details" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-info me-1">Szczegóły</a>
-                                    <a asp-action="Delete" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-danger">Usuń</a>
-                                </td>
-                            </tr>
-                            index++;
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

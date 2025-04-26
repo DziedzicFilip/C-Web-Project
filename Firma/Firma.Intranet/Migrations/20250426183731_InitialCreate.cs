@@ -80,7 +80,7 @@ namespace Firma.Intranet.Migrations
                     Nazwa = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Kod = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cena = table.Column<decimal>(type: "money", nullable: false),
-                    FotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ilosc = table.Column<int>(type: "int", nullable: false),
                     idRodzaju = table.Column<int>(type: "int", nullable: false)
@@ -93,33 +93,6 @@ namespace Firma.Intranet.Migrations
                         column: x => x.idRodzaju,
                         principalTable: "Rodzaj",
                         principalColumn: "IdRodzaju",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Zamowienie",
-                columns: table => new
-                {
-                    IdZamowienia = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DataZamowienia = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdUzytkownika = table.Column<int>(type: "int", nullable: false),
-                    Ulica = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Miasto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KodPocztowy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Kraj = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CzyZrealizowane = table.Column<bool>(type: "bit", nullable: false),
-                    CzyAnulowane = table.Column<bool>(type: "bit", nullable: false),
-                    SposobPlatnosci = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Zamowienie", x => x.IdZamowienia);
-                    table.ForeignKey(
-                        name: "FK_Zamowienie_Uzytkownik_IdUzytkownika",
-                        column: x => x.IdUzytkownika,
-                        principalTable: "Uzytkownik",
-                        principalColumn: "IdUzytkownika",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -153,29 +126,37 @@ namespace Firma.Intranet.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ZamowienieTowar",
+                name: "Zamowienie",
                 columns: table => new
                 {
-                    IdZamowienieTowar = table.Column<int>(type: "int", nullable: false)
+                    IdZamowienia = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdZamowienia = table.Column<int>(type: "int", nullable: false),
+                    DataZamowienia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdUzytkownika = table.Column<int>(type: "int", nullable: false),
+                    Ulica = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Miasto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KodPocztowy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Kraj = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CzyZrealizowane = table.Column<bool>(type: "bit", nullable: false),
+                    CzyAnulowane = table.Column<bool>(type: "bit", nullable: false),
+                    SposobPlatnosci = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdTowaru = table.Column<int>(type: "int", nullable: false),
                     Ilosc = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ZamowienieTowar", x => x.IdZamowienieTowar);
+                    table.PrimaryKey("PK_Zamowienie", x => x.IdZamowienia);
                     table.ForeignKey(
-                        name: "FK_ZamowienieTowar_Towar_IdTowaru",
+                        name: "FK_Zamowienie_Towar_IdTowaru",
                         column: x => x.IdTowaru,
                         principalTable: "Towar",
                         principalColumn: "idTowar",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ZamowienieTowar_Zamowienie_IdZamowienia",
-                        column: x => x.IdZamowienia,
-                        principalTable: "Zamowienie",
-                        principalColumn: "IdZamowienia",
+                        name: "FK_Zamowienie_Uzytkownik_IdUzytkownika",
+                        column: x => x.IdUzytkownika,
+                        principalTable: "Uzytkownik",
+                        principalColumn: "IdUzytkownika",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -195,19 +176,14 @@ namespace Firma.Intranet.Migrations
                 column: "idRodzaju");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Zamowienie_IdUzytkownika",
+                name: "IX_Zamowienie_IdTowaru",
                 table: "Zamowienie",
-                column: "IdUzytkownika");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ZamowienieTowar_IdTowaru",
-                table: "ZamowienieTowar",
                 column: "IdTowaru");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ZamowienieTowar_IdZamowienia",
-                table: "ZamowienieTowar",
-                column: "IdZamowienia");
+                name: "IX_Zamowienie_IdUzytkownika",
+                table: "Zamowienie",
+                column: "IdUzytkownika");
         }
 
         /// <inheritdoc />
@@ -223,19 +199,16 @@ namespace Firma.Intranet.Migrations
                 name: "Strona");
 
             migrationBuilder.DropTable(
-                name: "ZamowienieTowar");
+                name: "Zamowienie");
 
             migrationBuilder.DropTable(
                 name: "Towar");
 
             migrationBuilder.DropTable(
-                name: "Zamowienie");
+                name: "Uzytkownik");
 
             migrationBuilder.DropTable(
                 name: "Rodzaj");
-
-            migrationBuilder.DropTable(
-                name: "Uzytkownik");
         }
     }
 }

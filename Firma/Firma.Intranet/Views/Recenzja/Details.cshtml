@@ -1,48 +1,41 @@
 ﻿@model Firma.Intranet.Models.Sklep.Recenzja
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły recenzji";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Recenzja</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ocena)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ocena)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Komentarz)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Komentarz)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataDodania)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataDodania)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Towar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Towar.FotoUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Uzytkownik)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Uzytkownik.Email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdRecenzji">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold mb-4 text-primary">
+                        Szczegóły recenzji
+                    </h2>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 text-muted">Ocena</dt>
+                        <dd class="col-sm-8">@Model.Ocena</dd>
+                        <dt class="col-sm-4 text-muted">Komentarz</dt>
+                        <dd class="col-sm-8">@Model.Komentarz</dd>
+                        <dt class="col-sm-4 text-muted">Data dodania</dt>
+                        <dd class="col-sm-8">@Model.DataDodania.ToString("yyyy-MM-dd")</dd>
+                        <dt class="col-sm-4 text-muted">Towar</dt>
+                        <dd class="col-sm-8">
+                            @Model.Towar.Nazwa
+                        </dd>
+                        <dt class="col-sm-4 text-muted">Użytkownik</dt>
+                        <dd class="col-sm-8">@Model.Uzytkownik?.Email</dd>
+                    </dl>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@Model?.IdRecenzji" class="btn btn-outline-primary w-100 me-2">
+                            <i class="bi bi-pencil"></i> Edytuj
+                        </a>
+                        <a asp-action="Index" class="btn btn-primary w-100">
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

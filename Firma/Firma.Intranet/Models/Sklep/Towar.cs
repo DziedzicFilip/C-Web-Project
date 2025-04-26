@@ -31,7 +31,7 @@ namespace Firma.Intranet.Models.Sklep
         public Rodzaj? Rodzaj { get; set; }
 
         public ICollection<Recenzja> Recenzje { get; set; } = new List<Recenzja>();
-        public ICollection<ZamowienieTowar> ZamowieniaTowary { get; set; } = new List<ZamowienieTowar>();
+
 
 
 

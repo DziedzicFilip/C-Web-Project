@@ -4,7 +4,7 @@
     ViewData["Title"] = "Usuń zamówienie";
 }
 
-<div class="container mt-4">
+<div class=" mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-7 col-md-10">
             <div class="card shadow-sm border-0">
@@ -47,6 +47,10 @@
                                 <span class="badge bg-warning text-dark">Oczekujące</span>
                             }
                         </dd>
+                        <dt class="col-sm-4 text-muted">Kod towaru</dt>
+                        <dd class="col-sm-8">@Model.Towar?.Kod</dd>
+                        <dt class="col-sm-4 text-muted">Ilość</dt>
+                        <dd class="col-sm-8">@Model.Ilosc</dd>
                     </dl>
                     <form asp-action="Delete">
                         <input type="hidden" asp-for="IdZamowienia" />
