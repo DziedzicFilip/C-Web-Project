@@ -1,71 +1,78 @@
 ﻿@model Firma.Intranet.Models.Sklep.Zamowienie
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edytuj zamówienie";
 }
 
-<h1>Edit</h1>
+<div class="mt-4">
+    <h2 class="mb-4 fw-bold">Edytuj zamówienie</h2>
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="IdZamowienia" />
 
-<h4>Zamowienie</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdZamowienia" />
-            <div class="form-group">
-                <label asp-for="DataZamowienia" class="control-label"></label>
-                <input asp-for="DataZamowienia" class="form-control" />
-                <span asp-validation-for="DataZamowienia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdUzytkownika" class="control-label"></label>
-                <select asp-for="IdUzytkownika" class="form-control" asp-items="ViewBag.IdUzytkownika"></select>
-                <span asp-validation-for="IdUzytkownika" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ulica" class="control-label"></label>
-                <input asp-for="Ulica" class="form-control" />
-                <span asp-validation-for="Ulica" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Miasto" class="control-label"></label>
-                <input asp-for="Miasto" class="form-control" />
-                <span asp-validation-for="Miasto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KodPocztowy" class="control-label"></label>
-                <input asp-for="KodPocztowy" class="form-control" />
-                <span asp-validation-for="KodPocztowy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Kraj" class="control-label"></label>
-                <input asp-for="Kraj" class="form-control" />
-                <span asp-validation-for="Kraj" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CzyZrealizowane" /> @Html.DisplayNameFor(model => model.CzyZrealizowane)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CzyAnulowane" /> @Html.DisplayNameFor(model => model.CzyAnulowane)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="SposobPlatnosci" class="control-label"></label>
-                <input asp-for="SposobPlatnosci" class="form-control" />
-                <span asp-validation-for="SposobPlatnosci" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="DataZamowienia" class="form-label"></label>
+                    <input asp-for="DataZamowienia" class="form-control" type="date" />
+                    <span asp-validation-for="DataZamowienia" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="IdUzytkownika" class="form-label"></label>
+                    <select asp-for="IdUzytkownika" class="form-select" asp-items="ViewBag.IdUzytkownika"></select>
+                    <span asp-validation-for="IdUzytkownika" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Ulica" class="form-label"></label>
+                    <input asp-for="Ulica" class="form-control" placeholder="Wpisz ulicę..." />
+                    <span asp-validation-for="Ulica" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Miasto" class="form-label"></label>
+                    <input asp-for="Miasto" class="form-control" placeholder="Wpisz miasto..." />
+                    <span asp-validation-for="Miasto" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="KodPocztowy" class="form-label"></label>
+                    <input asp-for="KodPocztowy" class="form-control" placeholder="Wpisz kod pocztowy..." />
+                    <span asp-validation-for="KodPocztowy" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Kraj" class="form-label"></label>
+                    <input asp-for="Kraj" class="form-control" placeholder="Wpisz kraj..." />
+                    <span asp-validation-for="Kraj" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="CzyZrealizowane" />
+                    <label class="form-check-label" asp-for="CzyZrealizowane">
+                        @Html.DisplayNameFor(model => model.CzyZrealizowane)
+                    </label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="CzyAnulowane" />
+                    <label class="form-check-label" asp-for="CzyAnulowane">
+                        @Html.DisplayNameFor(model => model.CzyAnulowane)
+                    </label>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SposobPlatnosci" class="form-label"></label>
+                    <input asp-for="SposobPlatnosci" class="form-control" placeholder="Wpisz sposób płatności..." />
+                    <span asp-validation-for="SposobPlatnosci" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success w-100 me-2">Zapisz zmiany</button>
+                    <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

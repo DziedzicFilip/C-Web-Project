@@ -1,83 +1,89 @@
 ﻿@model IEnumerable<Firma.Intranet.Models.Sklep.Zamowienie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Zamówienia";
 }
 
-<h1>Index</h1>
+<div class="mt-4">
+    <h2 class="mb-4 fw-bold">Zamówienia</h2>
+    <div class="mb-4">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Dodaj zamówienie
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DataZamowienia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Uzytkownik)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ulica)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Miasto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KodPocztowy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kraj)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CzyZrealizowane)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CzyAnulowane)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SposobPlatnosci)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataZamowienia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Uzytkownik.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ulica)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Miasto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KodPocztowy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kraj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CzyZrealizowane)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CzyAnulowane)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SposobPlatnosci)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdZamowienia">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdZamowienia">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdZamowienia">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <label for="searchOrder" class="form-label">Szukaj zamówienia</label>
+            <input type="text" id="searchOrder" class="form-control" placeholder="Wpisz ID zamówienia lub email klienta...">
+            <button class="btn btn-primary mt-3 w-100">Szukaj</button>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <label for="filterStatus" class="form-label">Filtruj według statusu</label>
+            <select id="filterStatus" class="form-select">
+                <option value="">Wszystkie</option>
+                <option value="pending">Oczekujące</option>
+                <option value="completed">Zrealizowane</option>
+                <option value="cancelled">Anulowane</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <table class="table table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ID Zamówienia</th>
+                        <th>Klient (Email)</th>
+                        <th>Data Zamówienia</th>
+                        <th>Status</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">Brak zamówień do wyświetlenia.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        var index = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@index</td>
+                                <td>@item.IdZamowienia</td>
+                                <td>@item.Uzytkownik.Email</td>
+                                <td>@item.DataZamowienia.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    @if (item.CzyAnulowane)
+                                    {
+                                        <span class="badge bg-danger">Anulowane</span>
+                                    }
+                                    else if (item.CzyZrealizowane)
+                                    {
+                                        <span class="badge bg-success">Zrealizowane</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">Oczekujące</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-primary me-1">Edytuj</a>
+                                    <a asp-action="Details" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-info me-1">Szczegóły</a>
+                                    <a asp-action="Delete" asp-route-id="@item.IdZamowienia" class="btn btn-sm btn-danger">Usuń</a>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

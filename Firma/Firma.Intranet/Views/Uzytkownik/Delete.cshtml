@@ -1,39 +1,41 @@
 ﻿@model Firma.Intranet.Models.Sklep.Uzytkownik
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Usuń użytkownika";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Uzytkownik</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Imie)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Imie)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nazwisko)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nazwisko)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdUzytkownika" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class=" mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="fw-bold text-danger mb-3">Usuwanie użytkownika</h2>
+                    <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+                        <div>
+                            <strong>Czy na pewno chcesz usunąć tego użytkownika?</strong><br />
+                            Tej operacji nie można cofnąć!
+                        </div>
+                    </div>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 text-muted">Imię</dt>
+                        <dd class="col-sm-8">@Model.Imie</dd>
+                        <dt class="col-sm-4 text-muted">Nazwisko</dt>
+                        <dd class="col-sm-8">@Model.Nazwisko</dd>
+                        <dt class="col-sm-4 text-muted">Email</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+                    </dl>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="IdUzytkownika" />
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-danger w-100 me-2">
+                                <i class="bi bi-trash me-1"></i> Usuń użytkownika
+                            </button>
+                            <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,47 +1,60 @@
 ﻿@model IEnumerable<Firma.Intranet.Models.Sklep.Uzytkownik>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista użytkowników";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Imie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nazwisko)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Imie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nazwisko)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUzytkownika">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUzytkownika">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUzytkownika">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class=" mt-4">
+    <h2 class="fw-bold mb-2">Lista użytkowników</h2>
+    <div class="mb-4">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Dodaj użytkownika
+        </a>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="table-responsive shadow-sm rounded-3" style="max-width:1500px; width:100%;">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 25%;">Imię</th>
+                        <th style="width: 25%;">Nazwisko</th>
+                        <th style="width: 35%;">Email</th>
+                        <th style="width: 15%;" class="text-end">Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">
+                                Brak użytkowników do wyświetlenia.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Imie</td>
+                                <td>@item.Nazwisko</td>
+                                <td>@item.Email</td>
+                                <td class="text-end">
+                                    <a asp-action="Edit" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                        <i class="bi bi-pencil">Edytuj</i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                        <i class="bi bi-eye">Szczegóły</i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                        <i class="bi bi-trash">Usuń</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

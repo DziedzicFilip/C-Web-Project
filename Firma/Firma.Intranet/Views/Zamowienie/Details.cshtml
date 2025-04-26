@@ -1,72 +1,60 @@
 ﻿@model Firma.Intranet.Models.Sklep.Zamowienie
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły zamówienia";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Zamowienie</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataZamowienia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataZamowienia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Uzytkownik)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Uzytkownik.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ulica)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ulica)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Miasto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Miasto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KodPocztowy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KodPocztowy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Kraj)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kraj)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CzyZrealizowane)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CzyZrealizowane)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CzyAnulowane)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CzyAnulowane)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SposobPlatnosci)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SposobPlatnosci)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdZamowienia">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold mb-3 text-primary">
+                        Szczegóły zamówienia
+                    </h2>
+                    <div class="mb-4">
+                        <span class="badge bg-secondary me-2">
+                            ID: @Model.IdZamowienia
+                        </span>
+                        @if (Model.CzyAnulowane)
+                        {
+                            <span class="badge bg-danger">Anulowane</span>
+                        }
+                        else if (Model.CzyZrealizowane)
+                        {
+                            <span class="badge bg-success">Zrealizowane</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Oczekujące</span>
+                        }
+                    </div>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 text-muted">Data zamówienia</dt>
+                        <dd class="col-sm-8">@Model.DataZamowienia.ToString("yyyy-MM-dd")</dd>
+                        <dt class="col-sm-4 text-muted">Klient (Email)</dt>
+                        <dd class="col-sm-8">@Model.Uzytkownik?.Email</dd>
+                        <dt class="col-sm-4 text-muted">Ulica</dt>
+                        <dd class="col-sm-8">@Model.Ulica</dd>
+                        <dt class="col-sm-4 text-muted">Miasto</dt>
+                        <dd class="col-sm-8">@Model.Miasto</dd>
+                        <dt class="col-sm-4 text-muted">Kod pocztowy</dt>
+                        <dd class="col-sm-8">@Model.KodPocztowy</dd>
+                        <dt class="col-sm-4 text-muted">Kraj</dt>
+                        <dd class="col-sm-8">@Model.Kraj</dd>
+                        <dt class="col-sm-4 text-muted">Sposób płatności</dt>
+                        <dd class="col-sm-8">@Model.SposobPlatnosci</dd>
+                    </dl>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@Model?.IdZamowienia" class="btn btn-outline-primary w-100 me-2">
+                            <i class="bi bi-pencil"></i> Edytuj
+                        </a>
+                        <a asp-action="Index" class="btn btn-primary w-100">
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
