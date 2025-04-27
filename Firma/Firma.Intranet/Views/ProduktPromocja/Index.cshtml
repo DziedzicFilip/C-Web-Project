@@ -1,41 +1,83 @@
 ﻿@model IEnumerable<Firma.Intranet.Models.Sklep.ProduktPromocja>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Produkty w promocjach";
 }
 
-<h1>Index</h1>
+<div class="mt-4">
+    <div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+    <h2 class="fw-bold mb-2">Produkty w promocjach</h2>
+   
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Dodaj nowe powiązanie
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Towar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Promocja)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Towar.Kod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Promocja.Nazwa)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProduktyPromocji">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdProduktyPromocji">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProduktyPromocji">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+  
+    <div class="card shadow-sm border-0 mb-4" style="max-width: 1500px; margin: 0 auto;">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-5">
+                    <label for="search" class="form-label mb-1">Szukaj po kodzie towaru lub nazwie promocji</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz kod towaru lub nazwę promocji..." />
+                </div>
+                <div class="col-md-5">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Kod towaru A-Z</option>
+                        <option>Kod towaru Z-A</option>
+                        <option>Nazwa promocji A-Z</option>
+                        <option>Nazwa promocji Z-A</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded-3" style="max-width: 1500px; margin: 0 auto;">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 35%;">Kod towaru</th>
+                    <th style="width: 45%;">Nazwa promocji</th>
+                    <th style="width: 20%;" class="text-end">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="3" class="text-center text-muted py-4">
+                            Brak powiązań do wyświetlenia.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Towar?.Kod</td>
+                            <td>@item.Promocja?.Nazwa</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.IdProduktyPromocji" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil"></i> Edytuj
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.IdProduktyPromocji" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                    <i class="bi bi-eye"></i> Szczegóły
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdProduktyPromocji" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash"></i> Usuń
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

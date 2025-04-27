@@ -1,59 +1,106 @@
 ﻿@model IEnumerable<Firma.Intranet.Models.Sklep.Promocja>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Promocje";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nazwa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rabat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataRozpoczecia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataZakonczenia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CzyAktywna)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nazwa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rabat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataRozpoczecia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataZakonczenia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CzyAktywna)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPromocji">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPromocji">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPromocji">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+        <h2 class="fw-bold mb-2">Lista Promocji</h2>
+        <div class="mb-4">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-lg me-1">Dodaj promocję</i>
+            </a>
+        </div>
+
+    <div class="card shadow-sm border-0 mb-4" style="max-width: 1500px; margin: 0 auto;">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label for="search" class="form-label mb-1">Szukaj po nazwie promocji</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz nazwę promocji..." />
+                </div>
+                <div class="col-md-3">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Nazwa A-Z</option>
+                        <option>Nazwa Z-A</option>
+                        <option>Rabat rosnąco</option>
+                        <option>Rabat malejąco</option>
+                        <option>Data rozpoczęcia najnowsze</option>
+                        <option>Data rozpoczęcia najstarsze</option>
+                        <option>Status aktywności</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="status" class="form-label mb-1">Status</label>
+                    <select id="status" class="form-select">
+                        <option>Wszystkie</option>
+                        <option>Aktywne</option>
+                        <option>Nieaktywne</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Rabat</th>
+                    <th>Data rozpoczęcia</th>
+                    <th>Data zakończenia</th>
+                    <th>Status</th>
+                    <th class="text-end">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            Brak promocji do wyświetlenia.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Nazwa</td>
+                            <td>@item.Rabat</td>
+                            <td>@item.DataRozpoczecia.ToString("yyyy-MM-dd")</td>
+                            <td>@item.DataZakonczenia.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                @if (item.CzyAktywna)
+                                {
+                                    <span class="badge bg-success">Aktywna</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Nieaktywna</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.IdPromocji" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil">Edytuj</i>
+                                </a>
+                                
+                                <a asp-action="Delete" asp-route-id="@item.IdPromocji" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash">Usuń</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

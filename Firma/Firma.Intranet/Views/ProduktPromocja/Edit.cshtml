@@ -1,39 +1,40 @@
 ﻿@model Firma.Intranet.Models.Sklep.ProduktPromocja
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edytuj powiązanie produktu z promocją";
 }
 
-<h1>Edit</h1>
+<div class="mt-4">
+    <h2 class="mb-4 fw-bold">Edytuj powiązanie produktu z promocją</h2>
+    <div class="card shadow-sm border-0" style="max-width: 500px; margin: 0 auto;">
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="IdProduktyPromocji" />
 
-<h4>ProduktPromocja</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdProduktyPromocji" />
-            <div class="form-group">
-                <label asp-for="IdTowaru" class="control-label"></label>
-                <select asp-for="IdTowaru" class="form-control" asp-items="ViewBag.IdTowaru"></select>
-                <span asp-validation-for="IdTowaru" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdPromocji" class="control-label"></label>
-                <select asp-for="IdPromocji" class="form-control" asp-items="ViewBag.IdPromocji"></select>
-                <span asp-validation-for="IdPromocji" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="IdTowaru" class="form-label"></label>
+                    <select asp-for="IdTowaru" class="form-select" asp-items="ViewBag.IdTowaru"></select>
+                    <span asp-validation-for="IdTowaru" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="IdPromocji" class="form-label"></label>
+                    <select asp-for="IdPromocji" class="form-select" asp-items="ViewBag.IdPromocji"></select>
+                    <span asp-validation-for="IdPromocji" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success w-100 me-2">Zapisz zmiany</button>
+                    <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
