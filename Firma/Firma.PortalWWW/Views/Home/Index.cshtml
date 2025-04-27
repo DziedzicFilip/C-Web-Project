@@ -1,5 +1,7 @@
-﻿<main class="container-fluid p-0">
+﻿@model Firma.Data.Data.CMS.Strona
 
+<main class="container-fluid p-0">
+   
     <section class="container mb-5">
         <h2 class="fw-bold  mb-4">Aktualne Promocje</h2>
         <div class="row g-3">
@@ -25,60 +27,11 @@
        
             <div class="col-sm-12 col-lg-9  index-section">
                 <div class="row g-3">
-                
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0 bg-light h-100 text-center p-2">
-                            <img src="/images/products/monitor.png" alt="" class="card-img-top p-3">
-                            <h6>Produkt 1</h6>
-                            <p><strong>Cena:</strong> 3 499 zł</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Dodaj do koszyka</a>
-                        </div>
-                    </div>
+
+                    @await Html.PartialAsync("Promocje", (IEnumerable<Firma.Data.Data.Sklep.ProduktPromocja>)ViewBag.ModelPromocji)
 
          
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0 bg-light h-100 text-center p-2">
-                            <img src="/images/products/myszka.png" alt="" class="card-img-top p-3">
-                            <h6>Produkt 2 </h6>
-                            <p><strong>Cena:</strong> 1 299 zł</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Dodaj do koszyka</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0 bg-light h-100 text-center p-2">
-                            <img src="/images/products/telefon2.png" alt="" class="card-img-top p-3">
-                            <h6>Produkt 3</h6>
-                            <p><strong>Cena:</strong> 349 zł</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Dodaj do koszyka</a>
-                        </div>
-                    </div>
-
-      
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0 bg-light h-100 text-center p-2">
-                            <img src="/images/products/telfon.png" alt="" class="card-img-top p-3">
-                            <h6>Produkt 4</h6>
-                            <p><strong>Cena:</strong> 799 zł</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Dodaj do koszyka</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0 bg-light h-100 text-center p-2">
-                            <img src="/images/products/UTP_kabel.png" alt="" class="card-img-top p-3">
-                            <h6>Produkt 5</h6>
-                            <p><strong>Cena:</strong> 799 zł</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Dodaj do koszyka</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0 bg-light h-100 text-center p-2">
-                            <img src="/images/products/myszka.png" alt="" class="card-img-top p-3">
-                            <h6>Produkt 6</h6>
-                            <p><strong>Cena:</strong> 799 zł</p>
-                            <a href="#" class="btn btn-outline-primary w-100">Dodaj do koszyka</a>
-                        </div>
-                    </div>
+                    
 
                 </div>
             </div>

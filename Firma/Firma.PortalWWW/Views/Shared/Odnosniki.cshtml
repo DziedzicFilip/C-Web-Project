@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.Strona>
+<div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+        @foreach (var item in Model)
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link fw-bold" asp-area="" asp-controller="Home" asp-action="@item.LinkTytul" asp-route-id="@item.IdStrony">
+                    @item.Tytul
+                </a>
+            </li>
+        }
+       
+    </ul>
+
+    <form class="d-flex align-items-center w-50">
+        <input type="text" placeholder="Szukaj produktów..." class="form-control me-2 rounded-pill">
+        <button type="submit" class="btn btn-outline-primary rounded-pill px-4">Szukaj</button>
+    </form>
+
+
+    <div>
+        <a href="#" class="btn btn-outline-primary rounded-pill px-4">Koszyk (0)</a>
+    </div>
+
+</div>
