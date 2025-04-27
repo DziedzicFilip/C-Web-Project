@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firma.Data.Data;
-using Firma.Data.Data.Sklep;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using Firma.Data.Data;
+using Firma.Data.Data.Sklep;
 
 namespace Firma.Intranet.Controllers
 {
@@ -23,8 +22,8 @@ namespace Firma.Intranet.Controllers
         // GET: Towar
         public async Task<IActionResult> Index()
         {
-            var firmaIntranetContext = _context.Towar.Include(t => t.Rodzaj);
-            return View(await firmaIntranetContext.ToListAsync());
+            var firmaContext = _context.Towar.Include(t => t.Rodzaj);
+            return View(await firmaContext.ToListAsync());
         }
 
         // GET: Towar/Details/5
@@ -58,7 +57,7 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idTowar,Nazwa,Kod,Cena,FotoUrl,Opis,idRodzaju")] Towar towar)
+        public async Task<IActionResult> Create([Bind("idTowar,Nazwa,Kod,Cena,FotoUrl,Opis,Ilosc,idRodzaju,Waga,Wymiary,Kolor,Material,Producent,KrajProdukcji,GwarancjaMiesiace,Model,Stan")] Towar towar)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +91,7 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("idTowar,Nazwa,Kod,Cena,FotoUrl,Opis,idRodzaju")] Towar towar)
+        public async Task<IActionResult> Edit(int id, [Bind("idTowar,Nazwa,Kod,Cena,FotoUrl,Opis,Ilosc,idRodzaju,Waga,Wymiary,Kolor,Material,Producent,KrajProdukcji,GwarancjaMiesiace,Model,Stan")] Towar towar)
         {
             if (id != towar.idTowar)
             {

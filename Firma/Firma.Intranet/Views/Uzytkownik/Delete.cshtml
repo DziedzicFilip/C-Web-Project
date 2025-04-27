@@ -24,6 +24,10 @@
                         <dd class="col-sm-8">@Model.Nazwisko</dd>
                         <dt class="col-sm-4 text-muted">Email</dt>
                         <dd class="col-sm-8">@Model.Email</dd>
+                        <dt class="col-sm-4 text-muted">Login</dt>
+                        <dd class="col-sm-8">@Model.Login</dd>
+                        <dt class="col-sm-4 text-muted">Hasło</dt>
+                        <dd class="col-sm-8 text-muted">@Model.Haslo</dd>
                     </dl>
                     <form asp-action="Delete">
                         <input type="hidden" asp-for="IdUzytkownika" />

@@ -1,0 +1,43 @@
+﻿@model Firma.Data.Data.CMS.Onas
+
+@{
+    ViewData["Title"] = "Usuń wpis O nas";
+}
+
+<div class=" mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="fw-bold text-danger mb-3">Usuwanie wpisu "O nas"</h2>
+                    <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+                        <div>
+                            <strong>Czy na pewno chcesz usunąć ten wpis?</strong><br />
+                            Tej operacji nie można cofnąć!
+                        </div>
+                    </div>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 text-muted">Nazwa</dt>
+                        <dd class="col-sm-8">@Model.Name</dd>
+                        <dt class="col-sm-4 text-muted">Opis</dt>
+                        <dd class="col-sm-8">
+                            <div class="bg-light rounded p-3" style="white-space: pre-line; max-height: 200px; overflow:auto;">
+                                @Model.Description
+                            </div>
+                        </dd>
+                    </dl>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="IdOnas" />
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-danger w-100 me-2">
+                                <i class="bi bi-trash me-1"></i> Usuń wpis
+                            </button>
+                            <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

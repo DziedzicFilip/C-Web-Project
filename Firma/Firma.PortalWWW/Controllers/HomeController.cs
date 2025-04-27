@@ -96,6 +96,11 @@ namespace Firma.PortalWWW.Controllers
         }
         public async Task<IActionResult> Szczegoly(int? id_towaru)
         {
+            ViewBag.ModelBaner = (
+              from baner in _context.Baner
+              select baner
+          ).ToList();
+
             if (id_towaru == null)
             {
                 return NotFound(); // Obs³uga przypadku, gdy id_towaru jest null
@@ -116,6 +121,12 @@ namespace Firma.PortalWWW.Controllers
             return View(item); ;
         }
         public async Task<IActionResult> Regulamin(int? id)
+        {
+            var item = await GetStronaWithModelStronyAsync(id);
+            return View(item);
+        }
+
+        public async Task<IActionResult> Konto(int? id)
         {
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item);

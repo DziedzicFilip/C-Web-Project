@@ -14,20 +14,32 @@
 
                 <div class="mb-3">
                     <label asp-for="Imie" class="form-label"></label>
-                    <input asp-for="Imie" class="form-control" placeholder="Wpisz imię..." />
+                    <input asp-for="Imie" class="form-control" />
                     <span asp-validation-for="Imie" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="Nazwisko" class="form-label"></label>
-                    <input asp-for="Nazwisko" class="form-control" placeholder="Wpisz nazwisko..." />
+                    <input asp-for="Nazwisko" class="form-control" />
                     <span asp-validation-for="Nazwisko" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email" class="form-control" placeholder="Wpisz adres e-mail..." />
+                    <input asp-for="Email" class="form-control" type="email" />
                     <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Login" class="form-label"></label>
+                    <input asp-for="Login" class="form-control" />
+                    <span asp-validation-for="Login" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Haslo" class="form-label"></label>
+                    <input asp-for="Haslo" class="form-control" type="password" autocomplete="new-password" />
+                    <span asp-validation-for="Haslo" class="text-danger"></span>
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
@@ -38,3 +50,9 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

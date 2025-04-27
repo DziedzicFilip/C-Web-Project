@@ -1,0 +1,37 @@
+﻿@model Firma.Data.Data.CMS.PrzydatneLinki
+
+@{
+    ViewData["Title"] = "Szczegóły linku";
+}
+
+<div class=" mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold mb-4 text-primary">
+                        Szczegóły linku
+                    </h2>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 text-muted">Tytuł</dt>
+                        <dd class="col-sm-8">@Model.Tytul</dd>
+                        <dt class="col-sm-4 text-muted">Adres URL</dt>
+                        <dd class="col-sm-8">
+                            <a href="@Model.Link" target="_blank" rel="noopener" class="text-decoration-underline">
+                                @Model.Link
+                            </a>
+                        </dd>
+                    </dl>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@Model?.IdPrzydatneLinki" class="btn btn-outline-primary w-100 me-2">
+                            <i class="bi bi-pencil"></i> Edytuj
+                        </a>
+                        <a asp-action="Index" class="btn btn-primary w-100">
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.PolitykaPrywatnosci>
+
+@{
+    ViewData["Title"] = "Polityki prywatności";
+}
+
+<div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+    <h2 class="fw-bold mb-2">Polityki prywatności</h2>
+    <div class="mb-4">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Dodaj politykę
+        </a>
+    </div>
+
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-5">
+                    <label for="search" class="form-label mb-1">Szukaj po tytule</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz tytuł polityki..." />
+                </div>
+                <div class="col-md-4">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Tytuł A-Z</option>
+                        <option>Tytuł Z-A</option>
+                        <option>Data najnowsze</option>
+                        <option>Data najstarsze</option>
+                        <option>Aktywna</option>
+                        <option>Nieaktywna</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 45%;">Tytuł</th>
+                    <th style="width: 25%;">Data utworzenia</th>
+                    <th style="width: 15%;">Aktywna</th>
+                    <th style="width: 15%;" class="text-end">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">
+                            Brak polityk prywatności do wyświetlenia.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Tytul</td>
+                            <td>@item.DataUtworzenia.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                @if (item.Aktywna)
+                                {
+                                    <span class="badge bg-success">Tak</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Nie</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil"> Edytuj</i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                    <i class="bi bi-eye">Szczegóły</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash">Usuń</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

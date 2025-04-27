@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Firma.Data.Data;
-using Firma.Data.Data.Sklep;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-    
+using Firma.Data.Data;
+using Firma.Data.Data.Sklep;
 
 namespace Firma.Intranet.Controllers
 {
@@ -55,7 +54,7 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdUzytkownika,Imie,Nazwisko,Email")] Uzytkownik uzytkownik)
+        public async Task<IActionResult> Create([Bind("IdUzytkownika,Imie,Nazwisko,Email,Login,Haslo")] Uzytkownik uzytkownik)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +86,7 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdUzytkownika,Imie,Nazwisko,Email")] Uzytkownik uzytkownik)
+        public async Task<IActionResult> Edit(int id, [Bind("IdUzytkownika,Imie,Nazwisko,Email,Login,Haslo")] Uzytkownik uzytkownik)
         {
             if (id != uzytkownik.IdUzytkownika)
             {

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.Onas>
+
+@{
+    ViewData["Title"] = "O nas";
+}
+
+<div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+    <h2 class="fw-bold mb-2">O nas</h2>
+    <div class="mb-4">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Dodaj wpis
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <form class="row g-2 align-items-end">
+                <div class="col-md-7">
+                    <label for="search" class="form-label mb-1">Szukaj po nazwie lub opisie</label>
+                    <input type="text" id="search" class="form-control" placeholder="Wpisz nazwę lub fragment opisu..." />
+                </div>
+                <div class="col-md-3">
+                    <label for="sort" class="form-label mb-1">Sortuj według</label>
+                    <select id="sort" class="form-select">
+                        <option>Domyślnie</option>
+                        <option>Nazwa A-Z</option>
+                        <option>Nazwa Z-A</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 25%;">Nazwa</th>
+                    <th style="width: 55%;">Opis</th>
+                    <th style="width: 20%;" class="text-end">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="3" class="text-center text-muted py-4">
+                            Brak wpisów do wyświetlenia.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>
+                                <span class="text-truncate d-inline-block" style="max-width: 450px;" title="@item.Description">
+                                    @item.Description
+                                </span>
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.IdOnas" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil"> Edytuj</i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.IdOnas" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                    <i class="bi bi-eye">Szczegóły</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdOnas" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash">Usuń</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

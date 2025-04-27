@@ -3,7 +3,7 @@
     <ul class="navbar-nav">
         @if (Model != null && Model.Any())
         {
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse " id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     @foreach (var item in Model)
                     {
@@ -27,10 +27,14 @@
         <input type="text" placeholder="Szukaj produktów..." class="form-control me-2 rounded-pill">
         <button type="submit" class="btn btn-outline-primary rounded-pill px-4">Szukaj</button>
     </form>
+    <!--
 
 
     <div>
         <a href="#" class="btn btn-outline-primary rounded-pill px-4">Koszyk (0)</a>
     </div>
+    -->
+
+    
 
 </div>

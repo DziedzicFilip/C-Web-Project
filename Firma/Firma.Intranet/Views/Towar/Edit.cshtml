@@ -1,60 +1,131 @@
 ﻿@model Firma.Data.Data.Sklep.Towar
 
 @{
-    ViewData["Title"] = "Edytuj Produkt";
+    ViewData["Title"] = "Edytuj produkt";
 }
 
 <div class="mt-4">
-    <h2 class="mb-4 fw-bold">Edytuj Produkt</h2>
-    <div class="card shadow-sm border-0">
+    <h2 class="mb-4 fw-bold">Edytuj produkt</h2>
+    <div class="card shadow-sm border-0" style="max-width: 650px; margin: 0 auto;">
         <div class="card-body">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 <input type="hidden" asp-for="idTowar" />
 
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Nazwa" class="form-label"></label>
+                        <input asp-for="Nazwa" class="form-control" />
+                        <span asp-validation-for="Nazwa" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kod" class="form-label"></label>
+                        <input asp-for="Kod" class="form-control" />
+                        <span asp-validation-for="Kod" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Cena" class="form-label"></label>
+                        <input asp-for="Cena" class="form-control" />
+                        <span asp-validation-for="Cena" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Ilosc" class="form-label"></label>
+                        <input asp-for="Ilosc" class="form-control" />
+                        <span asp-validation-for="Ilosc" class="text-danger"></span>
+                    </div>
+                </div>
+
                 <div class="mb-3">
-                    <label asp-for="Nazwa" class="form-label"></label>
-                    <input asp-for="Nazwa" class="form-control" placeholder="Wpisz nazwę produktu..." />
-                    <span asp-validation-for="Nazwa" class="text-danger"></span>
+                    <label asp-for="FotoUrl" class="form-label"></label>
+                    <input asp-for="FotoUrl" class="form-control" />
+                    <span asp-validation-for="FotoUrl" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="Opis" class="form-label"></label>
-                    <textarea asp-for="Opis" class="form-control" rows="4" placeholder="Wpisz opis produktu..."></textarea>
+                    <textarea asp-for="Opis" class="form-control" rows="2"></textarea>
                     <span asp-validation-for="Opis" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Kod" class="form-label"></label>
-                    <input asp-for="Kod" class="form-control" placeholder="Wpisz kod produktu..." />
-                    <span asp-validation-for="Kod" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="idRodzaju" class="form-label"></label>
+                        <select asp-for="idRodzaju" class="form-select" asp-items="ViewBag.idRodzaju"></select>
+                        <span asp-validation-for="idRodzaju" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Producent" class="form-label"></label>
+                        <input asp-for="Producent" class="form-control" />
+                        <span asp-validation-for="Producent" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Cena" class="form-label"></label>
-                    <input asp-for="Cena" class="form-control" placeholder="Wpisz cenę..." step=".01" min="0.01" />
-                    <span asp-validation-for="Cena" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Waga" class="form-label"></label>
+                        <input asp-for="Waga" class="form-control" />
+                        <span asp-validation-for="Waga" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Wymiary" class="form-label"></label>
+                        <input asp-for="Wymiary" class="form-control" />
+                        <span asp-validation-for="Wymiary" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="idRodzaju" class="form-label"></label>
-                    <select asp-for="idRodzaju" class="form-select" asp-items="ViewBag.idRodzaju">
-                        <option disabled selected>Wybierz kategorię...</option>
-                    </select>
-                    <span asp-validation-for="idRodzaju" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Kolor" class="form-label"></label>
+                        <input asp-for="Kolor" class="form-control" />
+                        <span asp-validation-for="Kolor" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Material" class="form-label"></label>
+                        <input asp-for="Material" class="form-control" />
+                        <span asp-validation-for="Material" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="FotoUrl" class="form-label">Link do zdjęcia produktu</label>
-                    <input asp-for="FotoUrl" class="form-control" placeholder="Wklej URL zdjęcia lub zostaw puste..." />
-                    <span asp-validation-for="FotoUrl" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="KrajProdukcji" class="form-label"></label>
+                        <input asp-for="KrajProdukcji" class="form-control" />
+                        <span asp-validation-for="KrajProdukcji" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="GwarancjaMiesiace" class="form-label"></label>
+                        <input asp-for="GwarancjaMiesiace" class="form-control" />
+                        <span asp-validation-for="GwarancjaMiesiace" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Model" class="form-label"></label>
+                        <input asp-for="Model" class="form-control" />
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Stan" class="form-label"></label>
+                        <input asp-for="Stan" class="form-control" />
+                        <span asp-validation-for="Stan" class="text-danger"></span>
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
-                    <button type="submit" class="btn btn-primary w-100 me-2">Zapisz zmiany</button>
-                    <a asp-action="Index" class="btn btn-outline-secondary w-100">Anuluj</a>
+                    <button type="submit" class="btn btn-success w-100 me-2">Zapisz zmiany</button>
+                    <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

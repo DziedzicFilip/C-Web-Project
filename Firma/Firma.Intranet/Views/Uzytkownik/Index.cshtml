@@ -1,27 +1,26 @@
-﻿@model IEnumerable< Firma.Data.Data.Sklep.Uzytkownik>
+﻿@model IEnumerable<Firma.Data.Data.Sklep.Uzytkownik>
 
 @{
     ViewData["Title"] = "Lista użytkowników";
 }
 
+<div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
+    <h2 class="fw-bold mb-2">Użytkownicy</h2>
+    <div class="mb-4">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Dodaj użytkownika
+        </a>
+    </div>
 
-    <div class="mt-4" style="max-width: 1500px; margin: 0 auto;">
-        <h2 class="fw-bold mb-2">Lista stron</h2>
-        <div class="mb-4">
-            <a asp-action="Create" class="btn btn-success">
-                <i class="bi bi-plus-lg me-1">Dodaj użytkownika</i>
-            </a>
-        </div>
-
-  
-    <div class="card shadow-sm border-0 mb-4" style="max-width: 1500px; margin: 0 auto;">
+    <!-- Panel filtrów i sortowania -->
+    <div class="card shadow-sm border-0 mb-4">
         <div class="card-body">
             <form class="row g-2 align-items-end">
                 <div class="col-md-4">
                     <label for="search" class="form-label mb-1">Szukaj po imieniu, nazwisku lub emailu</label>
                     <input type="text" id="search" class="form-control" placeholder="Wpisz imię, nazwisko lub email..." />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="sort" class="form-label mb-1">Sortuj według</label>
                     <select id="sort" class="form-select">
                         <option>Domyślnie</option>
@@ -33,57 +32,63 @@
                         <option>Email Z-A</option>
                     </select>
                 </div>
-                <div class="col-md-4 d-flex align-items-end">
+                <div class="col-md-3">
+                    <label for="filter" class="form-label mb-1">Filtruj według</label>
+                    <select id="filter" class="form-select">
+                        <option>Wszyscy</option>
+                        <option>Administratorzy</option>
+                        <option>Użytkownicy</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
                     <button type="button" class="btn btn-primary w-100">Filtruj / Sortuj</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="d-flex justify-content-center">
-        <div class="table-responsive shadow-sm rounded-3" style="max-width:1500px; width:100%;">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
+    <div class="table-responsive shadow-sm rounded-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width: 25%;">Imię</th>
+                    <th style="width: 25%;">Nazwisko</th>
+                    <th style="width: 35%;">Email</th>
+                    <th style="width: 15%;" class="text-end">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
                     <tr>
-                        <th style="width: 25%;">Imię</th>
-                        <th style="width: 25%;">Nazwisko</th>
-                        <th style="width: 35%;">Email</th>
-                        <th style="width: 15%;" class="text-end">Akcje</th>
+                        <td colspan="4" class="text-center text-muted py-4">
+                            Brak użytkowników do wyświetlenia.
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @if (!Model.Any())
+                }
+                else
+                {
+                    foreach (var item in Model)
                     {
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">
-                                Brak użytkowników do wyświetlenia.
+                            <td>@item.Imie</td>
+                            <td>@item.Nazwisko</td>
+                            <td>@item.Email</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
+                                    <i class="bi bi-pencil">Edytuj</i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
+                                    <i class="bi bi-eye">Szczegóły</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-danger" title="Usuń">
+                                    <i class="bi bi-trash">Usuń</i>
+                                </a>
                             </td>
                         </tr>
                     }
-                    else
-                    {
-                        foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.Imie</td>
-                                <td>@item.Nazwisko</td>
-                                <td>@item.Email</td>
-                                <td class="text-end">
-                                    <a asp-action="Edit" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-primary me-1" title="Edytuj">
-                                        <i class="bi bi-pencil"></i> Edytuj
-                                    </a>
-                                    <a asp-action="Details" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-info me-1" title="Szczegóły">
-                                        <i class="bi bi-eye"></i> Szczegóły
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@item.IdUzytkownika" class="btn btn-sm btn-outline-danger" title="Usuń">
-                                        <i class="bi bi-trash"></i> Usuń
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

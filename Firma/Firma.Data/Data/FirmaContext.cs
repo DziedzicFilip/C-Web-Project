@@ -26,6 +26,13 @@ namespace Firma.Data.Data
         public DbSet<Baner> Baner { get; set; } = default!;
         public DbSet<ProduktPromocja> ProduktPromocja { get; set; } = default!;
         public DbSet<Promocja> Promocja { get; set; } = default!;
+        public DbSet<Kontakt> Kontakt { get; set; } = default!;
+        public DbSet<Onas> Onas { get; set; } = default!;
+        public DbSet<PolitykaPrywatnosci> PolitykaPrywatnosci { get; set; } = default!;
+        public DbSet<Regualmin> Regualmin { get; set; } = default!;
+        public DbSet<PrzydatneLinki> PrzydatneLinki { get; set; } = default!;
+        
+
 
     }
 }

@@ -1,7 +1,7 @@
-﻿@model IEnumerable< Firma.Data.Data.Sklep.Towar>
+﻿@model IEnumerable<Firma.Data.Data.Sklep.Towar>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista produktów";
 }
 
 <div class="mt-4">
@@ -24,7 +24,6 @@
                 <label for="filter" class="form-label">Filtruj według</label>
                 <select id="filter" class="form-select">
                     <option value="">Wybierz kategorię...</option>
-                 
                 </select>
             </div>
             <div class="d-flex justify-content-between">
@@ -35,27 +34,39 @@
                 <a asp-action="Create" class="btn btn-success w-100">Dodaj nowy produkt</a>
             </div>
         </div>
-        
+
+
         <div class="col-lg-9 col-md-12">
             <div class="row g-4">
                 @foreach (var item in Model)
                 {
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card h-100 shadow-sm rounded border-0" style="    margin-left: 10px;">
-                            <img src="@(!string.IsNullOrEmpty(item.FotoUrl) ? item.FotoUrl : "~/images/Products/default.png")" class="card-img-top p-3" style="height:200px; width:200px; object-fit:contain;" alt="@item.Nazwa">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm rounded border-0" style="margin-left: 10px;">
+                            <img src="@(!string.IsNullOrEmpty(item.FotoUrl) ? item.FotoUrl : "~/images/Products/default.png")"
+                                 class="card-img-top p-3"
+                                 style="height:200px; width:200px; object-fit:contain;"
+                                 alt="@item.Nazwa">
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-bold">@item.Nazwa</h5>
-                                <p class="card-text text-muted mb-2">@item.Opis</p>
+                                <p class="card-text text-muted mb-2" style="min-height:40px;">@item.Opis</p>
                                 <p><strong>Kod:</strong> @item.Kod</p>
                                 <p><strong>Rodzaj:</strong> @item.Rodzaj?.Nazwa</p>
                                 <p><strong>Cena:</strong> @item.Cena.ToString("C")</p>
                                 <div class="d-flex justify-content-center gap-2 mt-3">
                                     <a asp-action="Edit" asp-route-id="@item.idTowar" class="btn btn-sm btn-outline-primary">Edytuj</a>
-                                    <!--
-                                    <a asp-action="Details" asp-route-id="@item.idTowar" class="btn btn-sm btn-outline-info">Szczegóły</a> -->
+                                    <a asp-action="Details" asp-route-id="@item.idTowar" class="btn btn-sm btn-outline-info">Szczegóły</a>
                                     <a asp-action="Delete" asp-route-id="@item.idTowar" class="btn btn-sm btn-outline-danger">Usuń</a>
                                 </div>
                             </div>
+                            
+                        </div>
+                    </div>
+                }
+                @if (!Model.Any())
+                {
+                    <div class="col-12">
+                        <div class="alert alert-info text-center">
+                            Brak produktów do wyświetlenia.
                         </div>
                     </div>
                 }

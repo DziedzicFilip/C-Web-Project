@@ -1,54 +1,65 @@
 ﻿@model Firma.Data.Data.Sklep.Towar
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły produktu";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Towar</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nazwa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nazwa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Kod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cena)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cena)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FotoUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FotoUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rodzaj)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rodzaj.Nazwa)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.idTowar">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class=" mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-4 text-center">
+                            @if (!string.IsNullOrEmpty(Model.FotoUrl))
+                            {
+                                <img src="@Model.FotoUrl" alt="Zdjęcie produktu" class="img-fluid rounded shadow-sm mb-3" style="max-height: 220px; object-fit: contain;" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">Brak zdjęcia</span>
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="fw-bold mb-2 text-primary">@Model.Nazwa</h2>
+                            <p class="mb-1"><strong>Kod:</strong> @Model.Kod</p>
+                            <p class="mb-1"><strong>Cena:</strong> @Model.Cena.ToString("C")</p>
+                            <p class="mb-1"><strong>Ilość:</strong> @Model.Ilosc</p>
+                            <p class="mb-1"><strong>Rodzaj:</strong> @Model.Rodzaj?.Nazwa</p>
+                            <p class="mb-3"><strong>Opis:</strong> @Model.Opis</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 text-muted">Waga</dt>
+                        <dd class="col-sm-8">@Model.Waga</dd>
+                        <dt class="col-sm-4 text-muted">Wymiary</dt>
+                        <dd class="col-sm-8">@Model.Wymiary</dd>
+                        <dt class="col-sm-4 text-muted">Kolor</dt>
+                        <dd class="col-sm-8">@Model.Kolor</dd>
+                        <dt class="col-sm-4 text-muted">Materiał</dt>
+                        <dd class="col-sm-8">@Model.Material</dd>
+                        <dt class="col-sm-4 text-muted">Producent</dt>
+                        <dd class="col-sm-8">@Model.Producent</dd>
+                        <dt class="col-sm-4 text-muted">Kraj produkcji</dt>
+                        <dd class="col-sm-8">@Model.KrajProdukcji</dd>
+                        <dt class="col-sm-4 text-muted">Gwarancja</dt>
+                        <dd class="col-sm-8">@Model.GwarancjaMiesiace mies.</dd>
+                        <dt class="col-sm-4 text-muted">Model</dt>
+                        <dd class="col-sm-8">@Model.Model</dd>
+                        <dt class="col-sm-4 text-muted">Stan</dt>
+                        <dd class="col-sm-8">@Model.Stan</dd>
+                    </dl>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@Model?.idTowar" class="btn btn-outline-primary w-100 me-2">
+                            <i class="bi bi-pencil"></i> Edytuj
+                        </a>
+                        <a asp-action="Index" class="btn btn-primary w-100">
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

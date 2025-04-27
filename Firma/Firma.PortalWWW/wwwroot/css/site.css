@@ -26,9 +26,12 @@ body {
 .navbar {
     background-color: #F5AA1C; 
 }
+.navbar-nav{
+    padding-left:;
+}
 
 .navbar-brand, .nav-link {
-    color: #404040 ; 
+    color: #404040;
 }
 
 .btn-outline-primary {

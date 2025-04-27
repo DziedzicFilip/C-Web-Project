@@ -19,6 +19,10 @@
                         <dd class="col-sm-8">@Model.Nazwisko</dd>
                         <dt class="col-sm-4 text-muted">Email</dt>
                         <dd class="col-sm-8">@Model.Email</dd>
+                        <dt class="col-sm-4 text-muted">Login</dt>
+                        <dd class="col-sm-8">@Model.Login</dd>
+                        <dt class="col-sm-4 text-muted">Hasło</dt>
+                        <dd class="col-sm-8 text-muted">@Model.Haslo</dd>
                     </dl>
                     <div class="d-flex justify-content-between">
                         <a asp-action="Edit" asp-route-id="@Model?.IdUzytkownika" class="btn btn-outline-primary w-100 me-2">

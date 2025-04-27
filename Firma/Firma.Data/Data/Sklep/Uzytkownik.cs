@@ -21,7 +21,10 @@ namespace Firma.Data.Data.Sklep
         [Required(ErrorMessage = "Wymagany e-mail")]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
-
+        [MaxLength(20, ErrorMessage = "Login może mieć maksymalnie 20 znaków")]
+        public string? Login { get; set; } 
+        [MaxLength(20, ErrorMessage = "Hasło może mieć maksymalnie 20 znaków")]
+        public string? Haslo { get; set; } 
         public ICollection<Zamowienie> Zamowienia { get; set; } = new List<Zamowienie>();
         public ICollection<Recenzja> Recenzje { get; set; } = new List<Recenzja>();
     }

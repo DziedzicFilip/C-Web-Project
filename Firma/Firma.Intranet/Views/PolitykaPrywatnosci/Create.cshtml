@@ -1,0 +1,52 @@
+﻿@model Firma.Data.Data.CMS.PolitykaPrywatnosci
+
+@{
+    ViewData["Title"] = "Dodaj politykę prywatności";
+}
+
+<div class="mt-4">
+    <h2 class="mb-4 fw-bold">Dodaj politykę prywatności</h2>
+    <div class="card shadow-sm border-0" style="max-width: 650px; margin: 0 auto;">
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Tytul" class="form-label"></label>
+                    <input asp-for="Tytul" class="form-control" />
+                    <span asp-validation-for="Tytul" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Tresc" class="form-label"></label>
+                    <textarea asp-for="Tresc" class="form-control" rows="8"></textarea>
+                    <span asp-validation-for="Tresc" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DataUtworzenia" class="form-label"></label>
+                    <input asp-for="DataUtworzenia" class="form-control" type="date" />
+                    <span asp-validation-for="DataUtworzenia" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="Aktywna" />
+                    <label class="form-check-label" asp-for="Aktywna">
+                        @Html.DisplayNameFor(model => model.Aktywna)
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success w-100 me-2">Dodaj politykę</button>
+                    <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

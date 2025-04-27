@@ -1,0 +1,50 @@
+﻿@model Firma.Data.Data.CMS.PolitykaPrywatnosci
+
+@{
+    ViewData["Title"] = "Szczegóły polityki prywatności";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold mb-4 text-primary">
+                        Szczegóły polityki prywatności
+                    </h2>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-3 text-muted">Tytuł</dt>
+                        <dd class="col-sm-9">@Model.Tytul</dd>
+                        <dt class="col-sm-3 text-muted">Treść</dt>
+                        <dd class="col-sm-9">
+                            <div class="bg-light rounded p-3" style="white-space: pre-line;">
+                                @Model.Tresc
+                            </div>
+                        </dd>
+                        <dt class="col-sm-3 text-muted">Data utworzenia</dt>
+                        <dd class="col-sm-9">@Model.DataUtworzenia.ToString("yyyy-MM-dd")</dd>
+                        <dt class="col-sm-3 text-muted">Aktywna</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.Aktywna)
+                            {
+                                <span class="badge bg-success">Tak</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Nie</span>
+                            }
+                        </dd>
+                    </dl>
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-primary w-100 me-2">
+                            <i class="bi bi-pencil"></i> Edytuj
+                        </a>
+                        <a asp-action="Index" class="btn btn-primary w-100">
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

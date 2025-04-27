@@ -1,0 +1,56 @@
+﻿@model Firma.Data.Data.CMS.PolitykaPrywatnosci
+
+@{
+    ViewData["Title"] = "Usuń politykę prywatności";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h2 class="fw-bold text-danger mb-3">Usuwanie polityki prywatności</h2>
+                    <div class="alert alert-warning d-flex align-items-center mb-4" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+                        <div>
+                            <strong>Czy na pewno chcesz usunąć tę politykę prywatności?</strong><br />
+                            Tej operacji nie można cofnąć!
+                        </div>
+                    </div>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-3 text-muted">Tytuł</dt>
+                        <dd class="col-sm-9">@Model.Tytul</dd>
+                        <dt class="col-sm-3 text-muted">Treść</dt>
+                        <dd class="col-sm-9">
+                            <div class="bg-light rounded p-3" style="white-space: pre-line; max-height: 250px; overflow:auto;">
+                                @Model.Tresc
+                            </div>
+                        </dd>
+                        <dt class="col-sm-3 text-muted">Data utworzenia</dt>
+                        <dd class="col-sm-9">@Model.DataUtworzenia.ToString("yyyy-MM-dd")</dd>
+                        <dt class="col-sm-3 text-muted">Aktywna</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.Aktywna)
+                            {
+                                <span class="badge bg-success">Tak</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Nie</span>
+                            }
+                        </dd>
+                    </dl>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-danger w-100 me-2">
+                                <i class="bi bi-trash me-1"></i> Usuń politykę
+                            </button>
+                            <a asp-action="Index" class="btn btn-primary w-100">Powrót</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
