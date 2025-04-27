@@ -1,6 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Firma.Intranet.Models.Sklep
+namespace Firma.Data.Data.Sklep
 {
     public class Uzytkownik
     {

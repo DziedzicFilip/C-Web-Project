@@ -1,12 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
+
 
 #nullable disable
 
-namespace Firma.Intranet.Migrations
+namespace Firma.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class M1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +26,41 @@ namespace Firma.Intranet.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Aktualnosc", x => x.IdAktualnosc);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Baner",
+                columns: table => new
+                {
+                    IdBanera = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Tytul = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Zawartosc = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    UrlObrazka = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataPoczatkowa = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataZakonczenia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CzyAktywny = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Baner", x => x.IdBanera);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Promocja",
+                columns: table => new
+                {
+                    IdPromocji = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nazwa = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Rabat = table.Column<double>(type: "float", nullable: false),
+                    DataRozpoczecia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataZakonczenia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CzyAktywna = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Promocja", x => x.IdPromocji);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,6 +133,32 @@ namespace Firma.Intranet.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProduktPromocja",
+                columns: table => new
+                {
+                    IdProduktyPromocji = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdTowaru = table.Column<int>(type: "int", nullable: false),
+                    IdPromocji = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProduktPromocja", x => x.IdProduktyPromocji);
+                    table.ForeignKey(
+                        name: "FK_ProduktPromocja_Promocja_IdPromocji",
+                        column: x => x.IdPromocji,
+                        principalTable: "Promocja",
+                        principalColumn: "IdPromocji",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProduktPromocja_Towar_IdTowaru",
+                        column: x => x.IdTowaru,
+                        principalTable: "Towar",
+                        principalColumn: "idTowar",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Recenzja",
                 columns: table => new
                 {
@@ -161,6 +223,16 @@ namespace Firma.Intranet.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProduktPromocja_IdPromocji",
+                table: "ProduktPromocja",
+                column: "IdPromocji");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProduktPromocja_IdTowaru",
+                table: "ProduktPromocja",
+                column: "IdTowaru");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Recenzja_IdTowaru",
                 table: "Recenzja",
                 column: "IdTowaru");
@@ -193,6 +265,12 @@ namespace Firma.Intranet.Migrations
                 name: "Aktualnosc");
 
             migrationBuilder.DropTable(
+                name: "Baner");
+
+            migrationBuilder.DropTable(
+                name: "ProduktPromocja");
+
+            migrationBuilder.DropTable(
                 name: "Recenzja");
 
             migrationBuilder.DropTable(
@@ -200,6 +278,9 @@ namespace Firma.Intranet.Migrations
 
             migrationBuilder.DropTable(
                 name: "Zamowienie");
+
+            migrationBuilder.DropTable(
+                name: "Promocja");
 
             migrationBuilder.DropTable(
                 name: "Towar");

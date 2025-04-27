@@ -1,7 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Firma.Intranet.Models.Sklep
+namespace Firma.Data.Data.Sklep
 {
     public class Zamowienie
     {
@@ -17,7 +22,7 @@ namespace Firma.Intranet.Models.Sklep
         [ForeignKey(nameof(IdUzytkownika))]
         public Uzytkownik? Uzytkownik { get; set; }
 
-        // Adres dostawy
+        
         [Required(ErrorMessage = "Wymagana ulica")]
         public string Ulica { get; set; } = string.Empty;
 
@@ -39,7 +44,6 @@ namespace Firma.Intranet.Models.Sklep
         [Display(Name = "Spobosb Platności")]
         public string SposobPlatnosci { get; set; } = string.Empty;
 
-        // Nowe właściwości
         [Required]
         public int IdTowaru { get; set; }
 

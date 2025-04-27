@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Firma.Data.Data;
+using Firma.Data.Data.CMS;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Firma.Intranet.Data;
-using Firma.Intranet.Models.CMS;
 
 namespace Firma.Intranet.Controllers
 {
     public class BanerController : Controller
     {
-        private readonly FirmaIntranetContext _context;
+        private readonly FirmaContext _context;
 
-        public BanerController(FirmaIntranetContext context)
+        public BanerController(FirmaContext context)
         {
             _context = context;
         }

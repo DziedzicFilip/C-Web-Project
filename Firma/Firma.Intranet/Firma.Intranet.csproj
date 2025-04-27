@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\Firma.Data\Firma.Data.csproj" />
   </ItemGroup>
 
 </Project>
