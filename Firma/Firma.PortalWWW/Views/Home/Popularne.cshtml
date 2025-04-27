@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Firma.Data.Data.Sklep.Towar>
+<div class="row g-3 text-center index-section ">
+@foreach(var item in Model)
+{
+    <div class="col-md-2">
+        <div class="card h-100 shadow-sm border-0">
+            <img src="@item.FotoUrl" alt="Produkt 1" class="card-img-top p-3">
+            <div class="card-body">
+                <h6>@item.Nazwa</h6>
+                <p><strong>Cena:</strong> @item.Cena zł</p>
+                <a href="#" class="btn btn-outline-secondary w-100">Szczegóły</a>
+            </div>
+        </div>
+    </div>
+}
+</div>

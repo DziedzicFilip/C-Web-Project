@@ -1,0 +1,30 @@
+﻿@model Firma.Data.Data.Sklep.ProduktPromocja
+@{
+
+    decimal? cenaPrzed = Model.Towar?.Cena;
+    double? rabat = Model.Promocja?.Rabat;
+    decimal? cenaPo = (cenaPrzed.HasValue && rabat.HasValue)
+        ? (decimal)Math.Round((double)cenaPrzed.Value * (1 - rabat.Value), 2, MidpointRounding.AwayFromZero)
+        : (decimal?)null;
+    DateTime dateTime = Model.Promocja.DataZakonczenia;
+
+
+}
+<div class="col-sm-12 col-lg-3  index-section">
+    <div class="card h-100 shadow-sm border-0 bg-light d-flex flex-column justify-content-between">
+        <img src="@Model.Towar?.FotoUrl" alt="" class="card-img-top p-3">
+        <div class="card-body text-center">
+            <h5>@Model.Towar?.Nazwa</h5>
+            <p><strong>Aktualna Cena:</strong> @cenaPo</p>
+            <p id="stara_cena"><s>Stara Cena: @cenaPrzed</s></p>
+
+            <a href="#" class="btn  w-100">Kup teraz</a>
+            <div class="hit">
+                <h3>
+                    Nastepny Hit
+                    <h3>@dateTime.ToString("dd MMMM yyy")</h3>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>

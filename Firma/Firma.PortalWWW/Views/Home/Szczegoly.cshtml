@@ -1,7 +1,52 @@
-﻿
+﻿@model Firma.Data.Data.Sklep.Towar
+
 @{
-    ViewData["Title"] = "Szczegoly";
+    ViewData["Title"] = Model.Nazwa;
 }
 
-<h1>Szczegoly</h1>
+<div class="container py-4">
+    <div class="row g-4">
+ 
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 p-3">
+                <img src="@Model.FotoUrl" alt="@Model.Nazwa" class="img-fluid w-100 mb-2" style="object-fit: contain; max-height: 400px;" />
+          
+            </div>
+        </div>
 
+        <!-- Dane produktu -->
+        <div class="col-lg-6">
+            <h1 class="fw-bold mb-3">@Model.Nazwa</h1>
+            <div class="mb-2 text-muted">@Model.Kod</div>
+            <div class="mb-3 fs-4 fw-semibold text-success">
+                @Model.Cena.ToString("C")
+               
+            </div>
+            <div class="mb-4">
+                <button class="btn btn-lg btn-primary w-100 fw-bold">
+                    <i class="bi bi-cart-plus me-2"></i> Dodaj do koszyka
+                </button>
+            </div>
+            <div class="mb-3">
+               
+            </div>
+            <div class="mb-4">
+              
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Opis produktu -->
+    <div class="row mt-5">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 p-4">
+                <h4 class="fw-bold mb-3">Opis produktu</h4>
+                <div class="text-secondary">
+                    @Model.Opis
+                </div>
+            </div>
+        </div>
+        <!-- Możesz dodać np. sekcję opinii, powiązane produkty itd. -->
+    </div>
+</div>

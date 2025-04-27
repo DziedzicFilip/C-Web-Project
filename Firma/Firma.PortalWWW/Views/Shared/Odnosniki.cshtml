@@ -1,15 +1,26 @@
 ﻿@model IEnumerable<Firma.Data.Data.CMS.Strona>
 <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
     <ul class="navbar-nav">
-        @foreach (var item in Model)
+        @if (Model != null && Model.Any())
         {
-            <li class="nav-item dropdown">
-                <a class="nav-link fw-bold" asp-area="" asp-controller="Home" asp-action="@item.LinkTytul" asp-route-id="@item.IdStrony">
-                    @item.Tytul
-                </a>
-            </li>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    @foreach (var item in Model)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link fw-bold" asp-area="" asp-controller="Home" asp-action="@item.LinkTytul" asp-route-id="@item.IdStrony">
+                                @item.Tytul
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
         }
-       
+        else
+        {
+            
+        }
+
     </ul>
 
     <form class="d-flex align-items-center w-50">
