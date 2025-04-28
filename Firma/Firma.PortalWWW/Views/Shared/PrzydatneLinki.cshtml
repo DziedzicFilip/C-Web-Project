@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.PrzydatneLinki>
+
+
+<ul class="list-unstyled mb-0">
+    @foreach (var item in Model)
+    {
+    <li><a asp-area="" asp-controller="Home" asp-action="@item.Link">@item.Tytul</a></li>
+    }
+</ul>

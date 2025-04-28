@@ -26,11 +26,25 @@ namespace Firma.PortalWWW.Controllers
                 orderby strona.Pozycja
                 select strona
             ).ToList();
+
             ViewBag.ModelBaner = (
                 from baner in _context.Baner
                 select baner
             ).ToList();
+           
+            ViewBag.ModelLinki = (
+                from linki in _context.PrzydatneLinki
+                select linki
+            ).ToList();
+            ViewBag.ModelOnas = (
+                from onas in _context.Onas
+                select onas
+            ).ToList();
 
+            ViewBag.ModelKontakt = (
+                from kontakt in _context.Kontakt
+                select kontakt
+            ).ToList();
 
             if (id == null)
             {
@@ -60,8 +74,8 @@ namespace Firma.PortalWWW.Controllers
                  Produkt = g.Key, // Klucz grupy (Towar)
                  LiczbaZamowien = g.Sum(z => z.Ilosc) // Suma iloœci zamówionych produktów
              })
-             .OrderByDescending(x => x.LiczbaZamowien) // Sortuj malej¹co po liczbie zamówieñ
-             .Take(6) // Wybierz 6 najczêœciej zamawianych produktów
+             .OrderByDescending(x => x.LiczbaZamowien) 
+             .Take(6) 
              .Select(x => x.Produkt) // Wybierz same produkty
              .ToList();
 
@@ -79,6 +93,10 @@ namespace Firma.PortalWWW.Controllers
 
         public async Task<IActionResult> Privacy(int? id)
         {
+            ViewBag.ModelPolityka = (
+                from polityka in _context.PolitykaPrywatnosci
+                select polityka
+            ).ToList();
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item);
         }
@@ -103,25 +121,35 @@ namespace Firma.PortalWWW.Controllers
 
             if (id_towaru == null)
             {
-                return NotFound(); // Obs³uga przypadku, gdy id_towaru jest null
+                return NotFound(); 
             }
 
             var towar = await _context.Towar.FindAsync(id_towaru);
             if (towar == null)
             {
-                return NotFound(); // Obs³uga przypadku, gdy produkt nie istnieje
+                return NotFound(); 
             }
 
-            return View(towar); // Przekazanie obiektu Towar do widoku
+            return View(towar); 
         }
 
         public async Task<IActionResult> Kontakt(int? id)
         {
+                        ViewBag.ModelKontakt = (
+                from kontakt in _context.Kontakt
+                
+                select kontakt
+            ).ToList();
+
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item); ;
         }
         public async Task<IActionResult> Regulamin(int? id)
         {
+            ViewBag.ModelRegulamin = (
+                from regulamin in _context.Regualmin
+                select regulamin
+            ).ToList();
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item);
         }

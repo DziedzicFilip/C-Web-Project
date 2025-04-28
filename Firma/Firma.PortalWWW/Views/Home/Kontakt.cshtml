@@ -11,27 +11,7 @@
 
 
     <div class="row mb-5">
-   
-        <div class="col-md-6 mb-4">
-            <div class="bg-light p-4 rounded shadow-sm">
-                <h5 class="fw-bold">Biuro w Londynie</h5>
-                <p>4th Floor, Silverstream House<br>45 Fitzroy Street, Fitzrovia<br>London, W1T 6EB</p>
-                <p><strong>Telefon:</strong> 0845 1800 999 / 020 3510 2016</p>
-                <p><strong>Email:</strong> helpdesk@voltixservices.com</p>
-                <p><strong>Godziny otwarcia:</strong><br>Poniedziałek – Czwartek: 9:00 - 17:00<br>Piątek: 9:00 - 16:00</p>
-            </div>
-        </div>
-
-
-        <div class="col-md-6 mb-4">
-            <div class="bg-light p-4 rounded shadow-sm">
-                <h5 class="fw-bold">Biuro w West Sussex</h5>
-                <p>Unit 7, Stairbridge Court<br>Bolney Grange Business Park<br>Bolney, RH17 5PA</p>
-                <p><strong>Telefon:</strong> 0845 1800 999 / 020 3510 2016</p>
-                <p><strong>Email:</strong> sales@voltixservices.co.uk</p>
-                <p><strong>Godziny otwarcia:</strong><br>Poniedziałek – Czwartek: 9:00 - 17:00<br>Piątek: 9:00 - 16:00</p>
-            </div>
-        </div>
+        @await Html.PartialAsync("KontaktInfo", (IEnumerable<Firma.Data.Data.CMS.Kontakt>)ViewBag.ModelKontakt)
     </div>
 
 

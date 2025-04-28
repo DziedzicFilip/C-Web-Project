@@ -9,68 +9,7 @@
 
     <div class="accordion" id="termsAccordion">
 
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingGeneralTerms">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneralTerms" aria-expanded="true" aria-controls="collapseGeneralTerms">
-                    § 1 Postanowienia Ogólne
-                </button>
-            </h2>
-            <div id="collapseGeneralTerms" class="accordion-collapse collapse show" aria-labelledby="headingGeneralTerms" data-bs-parent="#termsAccordion">
-                <div class="accordion-body">
-                    Niniejszy regulamin określa zasady korzystania ze sklepu internetowego Firma.PortalWWW oraz warunki zawierania umów sprzedaży.
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOrders">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrders" aria-expanded="false" aria-controls="collapseOrders">
-                    § 2 Zamówienia
-                </button>
-            </h2>
-            <div id="collapseOrders" class="accordion-collapse collapse" aria-labelledby="headingOrders" data-bs-parent="#termsAccordion">
-                <div class="accordion-body">
-                    Zamówienia można składać przez całą dobę za pośrednictwem strony internetowej. Aby złożyć zamówienie, należy podać wymagane dane osobowe i zaakceptować regulamin.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOrders">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#LoremIpsum" aria-expanded="false" aria-controls="collapseOrders">
-                    § LoremIpsum
-                </button>
-            </h2>
-            <div id="LoremIpsum" class="accordion-collapse collapse" aria-labelledby="headingOrders" data-bs-parent="#termsAccordion">
-                <div class="accordion-body">
-                    Zamówienia można składać przez całą dobę za pośrednictwem strony internetowej. Aby złożyć zamówienie, należy podać wymagane dane osobowe i zaakceptować regulamin.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOrders">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#LoremIpsum2" aria-expanded="false" aria-controls="collapseOrders">
-                    § LoremIpsum2
-                </button>
-            </h2>
-            <div id="LoremIpsum2" class="accordion-collapse collapse" aria-labelledby="headingOrders" data-bs-parent="#termsAccordion">
-                <div class="accordion-body">
-                    Zamówienia można składać przez całą dobę za pośrednictwem strony internetowej. Aby złożyć zamówienie, należy podać wymagane dane osobowe i zaakceptować regulamin.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOrders">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#LoremIpsum3" aria-expanded="false" aria-controls="collapseOrders">
-                    § LoremIpsum3
-                </button>
-            </h2>
-            <div id="LoremIpsum3" class="accordion-collapse collapse" aria-labelledby="headingOrders" data-bs-parent="#termsAccordion">
-                <div class="accordion-body">
-                    Zamówienia można składać przez całą dobę za pośrednictwem strony internetowej. Aby złożyć zamówienie, należy podać wymagane dane osobowe i zaakceptować regulamin.
-                </div>
-            </div>
-        </div>
-
+        @await Html.PartialAsync("RegulaminInfo", (IEnumerable<Firma.Data.Data.CMS.Regualmin>)ViewBag.ModelRegulamin)
 
       </div>
     </div>

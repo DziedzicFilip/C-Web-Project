@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.PolitykaPrywatnosci>
+@foreach (var item in Model)
+{
+   
+    var collapseId = $"collapse_{item.Id}";
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingDataCollection">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@collapseId" aria-expanded="false" aria-controls="@collapseId">
+                @item.Tytul
+            </button>
+        </h2>
+        <div id="@collapseId" class="accordion-collapse collapse" aria-labelledby="headingDataCollection" data-bs-parent="#privacyAccordion">
+            <div class="accordion-body">
+                <p>Zbieramy następujące dane osobowe:</p>
+                <p>
+                    @item.Tresc
+                </p>
+            </div>
+        </div>
+    </div>
+}
