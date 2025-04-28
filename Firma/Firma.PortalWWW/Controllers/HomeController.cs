@@ -140,6 +140,7 @@ namespace Firma.PortalWWW.Controllers
                 select kontakt
             ).ToList();
 
+
             if (id_towaru == null)
             {
                 return NotFound(); 

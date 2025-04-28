@@ -4,49 +4,259 @@
     ViewData["Title"] = Model.Nazwa;
 }
 
-<div class="container py-4">
+
+    <style>
+        .product-main-card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-image {
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            max-width: 550px;
+            max-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .product-image img {
+                max-width: 100%;
+                max-height: 300px;
+                object-fit: contain;
+            }
+
+        .product-thumbs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+            .product-thumbs img {
+                width: 60px;
+                height: 60px;
+                object-fit: contain;
+                border-radius: 0.5rem;
+                border: 2px solid transparent;
+                cursor: pointer;
+                transition: border 0.2s;
+            }
+
+                .product-thumbs img.active {
+                border: 2px solid #F5AA1C;
+                }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .product-meta {
+            font-size: 1rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #4caf50;
+        }
+
+        .product-old-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-left: 1rem;
+        }
+
+        .product-tabs .nav-link {
+            font-weight: 500;
+            color: #333;
+            border: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+            .product-tabs .nav-link.active {
+            color: #F5AA1C;
+            border-bottom: 2.5px solid #F5AA1C;
+                background: #f8f9fa;
+            }
+
+        .product-tabs .tab-content {
+            background: #fff;
+            border-radius: 0 0 0.5rem 0.5rem;
+            border: 1px solid #eee;
+            border-top: none;
+            padding: 1.5rem;
+        }
+
+        .review-card {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary, .btn-outline-primary {
+            border: none;
+            font-weight: 600;
+        }
+
+    .btn-primary{
+        background-color: #F5AA1C;
+    }
+
+        .btn-primary:hover {
+            background-color: #404040;
+        }
+
+    
+
+        .product-info-list li {
+            margin-bottom: 0.4rem;
+        }
+    </style>
+
+
+<div class="container py-5">
     <div class="row g-4">
- 
+       
         <div class="col-lg-6">
-            <div class="card shadow-sm border-0 p-3">
-                <img src="@Model.FotoUrl" alt="@Model.Nazwa" class="img-fluid w-100 mb-2" style="object-fit: contain; max-height: 400px;" />
-          
-            </div>
-        </div>
-
-        <!-- Dane produktu -->
-        <div class="col-lg-6">
-            <h1 class="fw-bold mb-3">@Model.Nazwa</h1>
-            <div class="mb-2 text-muted">@Model.Kod</div>
-            <div class="mb-3 fs-4 fw-semibold text-success">
-                @Model.Cena.ToString("C")
-               
-            </div>
-            <div class="mb-4">
-                <button class="btn btn-lg btn-primary w-100 fw-bold">
-                    <i class="bi bi-cart-plus me-2"></i> Dodaj do koszyka
-                </button>
-            </div>
-            <div class="mb-3">
-               
-            </div>
-            <div class="mb-4">
+            <div class="product-main-card">
+                <div class="product-gallery">
+                    <div class="product-image" id="mainProductImage">
+                        <img src="@Model.FotoUrl" alt="@Model.Nazwa" id="mainImageTag" />
+                    </div>
+                    
+                </div>
               
+                <div class="product-tabs mt-2">
+                    <ul class="nav nav-tabs" id="productTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">
+                                Szczegóły
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab">
+                                Opis
+                            </button>
+                        </li>
+                        <!-- 
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
+                                Recenzje
+                            </button>
+                        </li>
+                        -->
+                    </ul>
+                    <div class="tab-content" id="productTabContent">
                 
-            </div>
-        </div>
-    </div>
-
-    <!-- Opis produktu -->
-    <div class="row mt-5">
-        <div class="col-lg-8">
-            <div class="card shadow-sm border-0 p-4">
-                <h4 class="fw-bold mb-3">Opis produktu</h4>
-                <div class="text-secondary">
-                    @Model.Opis
+                        <div class="tab-pane fade show active" id="details" role="tabpanel">
+                            <ul class="list-unstyled product-info-list">
+                                <li><strong>Kod:</strong> @Model.Kod</li>
+                                <li><strong>Ilość:</strong> @Model.Ilosc</li>
+                                <li><strong>Rodzaj:</strong> @Model.Rodzaj?.Nazwa</li>
+                                <li><strong>Waga:</strong> @(Model.Waga.HasValue ? $"{Model.Waga} kg" : "-")</li>
+                                <li><strong>Wymiary:</strong> @Model.Wymiary</li>
+                                <li><strong>Kolor:</strong> @Model.Kolor</li>
+                                <li><strong>Materiał:</strong> @Model.Material</li>
+                                <li><strong>Producent:</strong> @Model.Producent</li>
+                                <li><strong>Kraj produkcji:</strong> @Model.KrajProdukcji</li>
+                                <li><strong>Gwarancja:</strong> @(Model.GwarancjaMiesiace.HasValue ? $"{Model.GwarancjaMiesiace} mies." : "-")</li>
+                                <li><strong>Model:</strong> @Model.Model</li>
+                                <li><strong>Stan:</strong> @(Model.Stan?.ToString() ?? "-")</li>
+                            </ul>
+                        </div>
+                   
+                        <div class="tab-pane fade" id="desc" role="tabpanel">
+                            <div>
+                                @Model.Opis
+                            </div>
+                        </div>
+                        <!-- 
+                        <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            @if (Model.Recenzje.Any())
+                            {
+                                foreach (var item in Model.Recenzje)
+                                {
+                                    <div class="review-card">
+                                        <div class="fw-semibold">@item.Uzytkownik</div>
+                                        <div class="text-muted small mb-1">@item.DataDodania.ToString("yyyy-MM-dd")</div>
+                                        <div>@item.Komentarz</div>
+                                        <div>@item.Ocena</div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-muted">Brak recenzji.</div>
+                            }
+                            <button class="btn btn-outline-primary mt-2 w-100" data-bs-toggle="modal" data-bs-target="#addReviewModal">
+                                <i class="bi bi-pencil-square me-2"></i>Dodaj recenzję
+                            </button>
+                        </div>
+                        -->
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Możesz dodać np. sekcję opinii, powiązane produkty itd. -->
+
+ 
+        <div class="col-lg-6">
+            <div class="product-main-card  d-flex flex-column justify-content-between">
+                <div>
+                    <div class="product-title mb-2">@Model.Nazwa</div>
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="product-price">@Model.Cena</span>  
+                    </div>
+                    <div>
+                        <button class="btn btn-lg btn-primary w-100 fw-bold mb-3">
+                            <i class="bi bi-cart-plus me-2">Zamów</i> 
+                        </button>
+                      
+                    </div>
+                </div>
+               
+            </div>
+        </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="addReviewModal" tabindex="-1" aria-labelledby="addReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/Recenzje/Dodaj">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addReviewModalLabel">Dodaj recenzję</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="idTowar" value="@Model.idTowar" />
+                    <div class="mb-3">
+                        <label for="Autor" class="form-label">Imię</label>
+                        <input type="text" class="form-control" name="Autor" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Tresc" class="form-label">Treść recenzji</label>
+                        <textarea class="form-control" name="Tresc" rows="4" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                    <button type="submit" class="btn btn-primary">Dodaj recenzję</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
