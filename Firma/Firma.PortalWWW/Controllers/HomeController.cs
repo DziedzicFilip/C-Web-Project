@@ -18,6 +18,7 @@ namespace Firma.PortalWWW.Controllers
             _logger = logger;
             _context = context;
         }
+        
         private async Task<Strona?> GetStronaWithModelStronyAsync(int? id)
         {
             
@@ -114,10 +115,30 @@ namespace Firma.PortalWWW.Controllers
         }
         public async Task<IActionResult> Szczegoly(int? id_towaru)
         {
+            ViewBag.ModelStrony = (
+                 from strona in _context.Strona
+                 orderby strona.Pozycja
+                 select strona
+             ).ToList();
+
             ViewBag.ModelBaner = (
-              from baner in _context.Baner
-              select baner
-          ).ToList();
+                from baner in _context.Baner
+                select baner
+            ).ToList();
+
+            ViewBag.ModelLinki = (
+                from linki in _context.PrzydatneLinki
+                select linki
+            ).ToList();
+            ViewBag.ModelOnas = (
+                from onas in _context.Onas
+                select onas
+            ).ToList();
+
+            ViewBag.ModelKontakt = (
+                from kontakt in _context.Kontakt
+                select kontakt
+            ).ToList();
 
             if (id_towaru == null)
             {
