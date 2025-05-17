@@ -1,0 +1,31 @@
+﻿@model Firma.Data.Data.Sklep.Uzytkownik
+@{
+    string? imie = Model?.Imie;
+    string? nazwisko = Model?.Nazwisko;
+    string? email = Model?.Email;
+}
+
+
+<div class="row g-4">
+
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <h4 class="fw-bold mb-3">Dane użytkownika</h4>
+                <dl class="row mb-0">
+                    <dt class="col-sm-5 text-muted">Imię</dt>
+                    <dd class="col-sm-7">@imie</dd>
+                    <dt class="col-sm-5 text-muted">Nazwisko</dt>
+                    <dd class="col-sm-7">@nazwisko</dd>
+                    <dt class="col-sm-5 text-muted">Email</dt>
+                    <dd class="col-sm-7">@email</dd>
+                </dl>
+                <div class="mt-4">
+                    
+                    <a href="#" class="btn btn-outline-primary w-100 disabled">
+                       
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,11 @@
+﻿@model Firma.Data.Data.Sklep.Zamowienie
+
+<div class="container py-4">
+    <h2>Podsumowanie zamówienia</h2>
+    <p><strong>Data zamówienia:</strong> @Model.DataZamowienia</p>
+    <p><strong>Towar:</strong> @Model.Towar?.Nazwa</p>
+    <p><strong>Ilość:</strong> @Model.Ilosc</p>
+    <p><strong>Cena:</strong> @Model.Towar?.Cena</p>
+    <p><strong>Adres:</strong> @Model.Ulica, @Model.KodPocztowy @Model.Miasto, @Model.Kraj</p>
+    <p><strong>Status:</strong> @(Model.CzyZrealizowane ? "Zrealizowane" : "Oczekujące")</p>
+</div>

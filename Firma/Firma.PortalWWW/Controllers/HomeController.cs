@@ -176,8 +176,116 @@ namespace Firma.PortalWWW.Controllers
 
         public async Task<IActionResult> Konto(int? id)
         {
+            int userId = 1;
+
+            ViewBag.User = (
+                from uzytkownik in _context.Uzytkownik
+                select uzytkownik
+            ).FirstOrDefault();
+            ViewBag.ZamowieniaUser = (
+                from z in _context.Zamowienie
+                where z.IdUzytkownika == userId
+                orderby z.DataZamowienia descending
+                select z)
+                        .Include(z => z.Towar).ToList(); 
+            ViewBag.RecenzjeUser = (
+                from r in _context.Recenzja
+                where r.IdUzytkownika == userId
+                orderby r.DataDodania descending
+                select r)
+                        .Include(r => r.Towar).ToList();
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item);
+        }
+        public async Task<IActionResult> Zamow(int idTowaru)
+        {
+
+            #region Baza Strony
+            ViewBag.ModelStrony = (
+                 from strona in _context.Strona
+                 orderby strona.Pozycja
+                 select strona
+             ).ToList();
+
+            ViewBag.ModelBaner = (
+                from baner in _context.Baner
+                select baner
+            ).ToList();
+
+            ViewBag.ModelLinki = (
+                from linki in _context.PrzydatneLinki
+                select linki
+            ).ToList();
+            ViewBag.ModelOnas = (
+                from onas in _context.Onas
+                select onas
+            ).ToList();
+
+            ViewBag.ModelKontakt = (
+                from kontakt in _context.Kontakt
+                select kontakt
+            ).ToList();
+            #endregion
+            int userId = 1; 
+            var towar = await _context.Towar.FindAsync(idTowaru);
+            if (towar == null)
+                return NotFound();
+
+            var zamowienie = new Zamowienie
+            {
+                DataZamowienia = DateTime.Now,
+                IdUzytkownika = userId,
+                
+                CzyZrealizowane = false,
+                CzyAnulowane = false,
+                SposobPlatnosci = "Karta",
+                IdTowaru = towar.idTowar,
+                Ilosc = 1 
+            };
+
+            _context.Zamowienie.Add(zamowienie);
+            await _context.SaveChangesAsync();
+
+           
+            return RedirectToAction("Podsumowanie", new { id = zamowienie.IdZamowienia });
+        }
+
+        public async Task<IActionResult> Podsumowanie(int id)
+        {
+            #region Baza Strony
+            ViewBag.ModelStrony = (
+                 from strona in _context.Strona
+                 orderby strona.Pozycja
+                 select strona
+             ).ToList();
+
+            ViewBag.ModelBaner = (
+                from baner in _context.Baner
+                select baner
+            ).ToList();
+
+            ViewBag.ModelLinki = (
+                from linki in _context.PrzydatneLinki
+                select linki
+            ).ToList();
+            ViewBag.ModelOnas = (
+                from onas in _context.Onas
+                select onas
+            ).ToList();
+
+            ViewBag.ModelKontakt = (
+                from kontakt in _context.Kontakt
+                select kontakt
+            ).ToList();
+            #endregion
+            var zamowienie = await _context.Zamowienie
+                .Include(z => z.Towar)
+                .FirstOrDefaultAsync(z => z.IdZamowienia == id);
+
+            if (zamowienie == null)
+                return NotFound();
+
+            return View(zamowienie);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
