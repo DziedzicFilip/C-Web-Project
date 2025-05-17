@@ -218,14 +218,37 @@
                     <div class="d-flex align-items-center mb-3">
                         <span class="product-price">@Model.Cena</span>  
                     </div>
-                    <div>
-                        <form asp-controller="Home" asp-action="Zamow" method="post">
+                    <button class="btn btn-lg btn-primary w-100 fw-bold mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#orderFormCollapse" aria-expanded="false" aria-controls="orderFormCollapse">
+                        <i class="bi bi-cart-plus me-2"></i> Zamów
+                    </button>
+                    <div class="collapse" id="orderFormCollapse">
+                        <form asp-controller="Home" asp-action="Zamow" method="post" class="mb-3 mt-3">
                             <input type="hidden" name="idTowaru" value="@Model.idTowar" />
-                            <button type="submit" class="btn btn-lg btn-primary w-100 fw-bold mb-3">
-                                <i class="bi bi-cart-plus me-2"></i> Zamów
-                            </button>
+                            <div class="mb-2">
+                                <label for="ilosc" class="form-label">Ilość</label>
+                                <input type="number" class="form-control" name="ilosc" id="ilosc" value="1" min="1" required />
+                            </div>
+                            <div class="mb-2">
+                                <label for="miasto" class="form-label">Miasto</label>
+                                <input type="text" class="form-control" name="miasto" id="miasto" required />
+                            </div>
+                            <div class="mb-2">
+                                <label for="ulica" class="form-label">Ulica</label>
+                                <input type="text" class="form-control" name="ulica" id="ulica" required />
+                            </div>
+                            <div class="mb-2">
+                                <label for="kodPocztowy" class="form-label">Kod pocztowy</label>
+                                <input type="text" class="form-control" name="kodPocztowy" id="kodPocztowy" placeholder="00-000" required pattern="\d{2}-\d{3}" />
+                            </div>
+                            <div class="mb-2">
+                                <label for="kraj" class="form-label">Kraj</label>
+                                <input type="text" class="form-control" name="kraj" id="kraj" required />
+                            </div>
+                            
+                            <button type="submit" class="btn btn-success w-100 fw-bold">Złóż zamówienie</button>
                         </form>
                     </div>
+
                 </div>
                
             </div>

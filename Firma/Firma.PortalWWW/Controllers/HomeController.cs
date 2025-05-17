@@ -6,6 +6,7 @@ using Firma.Data.Data.Sklep;
 using Firma.PortalWWW.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Firma.PortalWWW.Controllers
 {
@@ -197,9 +198,10 @@ namespace Firma.PortalWWW.Controllers
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item);
         }
-        public async Task<IActionResult> Zamow(int idTowaru)
+        public async Task<IActionResult> Zamow(
+    int idTowaru, int ilosc, string miasto, string ulica, string kodPocztowy,
+    string kraj, string telefon, string email, string? uwagi)
         {
-
             #region Baza Strony
             ViewBag.ModelStrony = (
                  from strona in _context.Strona
@@ -226,7 +228,8 @@ namespace Firma.PortalWWW.Controllers
                 select kontakt
             ).ToList();
             #endregion
-            int userId = 1; 
+
+            int userId = 1;
             var towar = await _context.Towar.FindAsync(idTowaru);
             if (towar == null)
                 return NotFound();
@@ -235,18 +238,20 @@ namespace Firma.PortalWWW.Controllers
             {
                 DataZamowienia = DateTime.Now,
                 IdUzytkownika = userId,
-                
                 CzyZrealizowane = false,
                 CzyAnulowane = false,
                 SposobPlatnosci = "Karta",
                 IdTowaru = towar.idTowar,
-                Ilosc = 1 
+                Ilosc = ilosc,
+                Miasto = miasto,
+                Ulica = ulica,
+                KodPocztowy = kodPocztowy,
+                
             };
 
             _context.Zamowienie.Add(zamowienie);
             await _context.SaveChangesAsync();
 
-           
             return RedirectToAction("Podsumowanie", new { id = zamowienie.IdZamowienia });
         }
 
