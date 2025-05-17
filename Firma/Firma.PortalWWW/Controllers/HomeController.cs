@@ -59,26 +59,24 @@ namespace Firma.PortalWWW.Controllers
 
         public async Task<IActionResult> Index(int? id)
         {
-            ViewBag.ModelPromocji = _context.ProduktPromocja
-            .Include(pp => pp.Towar)  // pozwlaa na dolaczenie dancy z atabeli Towar
-            .Include(pp => pp.Promocja) // pozwlaa na do³aczenie danych z tabeli Promocja
-            .ToList();
-                    ViewBag.ModelBigPromocji = _context.ProduktPromocja
-           .Include(pp => pp.Towar)  
-           .Include(pp => pp.Promocja)
-           .FirstOrDefault();
+            ViewBag.ModelPromocji = (from pp in _context.ProduktPromocja
+                     .Include(pp => pp.Towar)
+                     .Include(pp => pp.Promocja)
+                                     select pp).ToList();
+            ViewBag.ModelBigPromocji = (from pp in _context.ProduktPromocja
+                        .Include(pp => pp.Towar)
+                        .Include(pp => pp.Promocja)
+                                        select pp).FirstOrDefault();
+           
+            var zamowienia = (from z in _context.Zamowienie
+                              join t in _context.Towar on z.Towar.idTowar equals t.idTowar
+                              select new { Zamowienie = z, Towar = t }).ToList();
 
-            ViewBag.ModelPopularne = _context.Zamowienie
-             .GroupBy(z => z.Towar) // Grupuj zamówienia po Towar
-             .Select(g => new
-             {
-                 Produkt = g.Key, // Klucz grupy (Towar)
-                 LiczbaZamowien = g.Sum(z => z.Ilosc) // Suma iloœci zamówionych produktów
-             })
-             .OrderByDescending(x => x.LiczbaZamowien) 
-             .Take(6) 
-             .Select(x => x.Produkt) // Wybierz same produkty
-             .ToList();
+            ViewBag.ModelPopularne = (from z in zamowienia
+                                      group z.Zamowienie by z.Towar into g
+                                      let liczbaZamowien = g.Sum(x => x.Ilosc)
+                                      orderby liczbaZamowien descending
+                                      select g.Key).Take(6).ToList();
 
             ViewBag.ModelDlaCiebie = (
                 from towar in _context.Towar
