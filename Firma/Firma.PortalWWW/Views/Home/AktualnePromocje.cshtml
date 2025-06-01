@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.Aktualnosc>
+@{
+    if (Model == null)
+    {
+        return;
+    }
+    var aktualnosci = ViewBag.Aktualnosci as List<Firma.Data.Data.CMS.Aktualnosc>;
+    var tytul = aktualnosci?.FirstOrDefault(x => x.Pozycja == 1)?.Tytul;
+}
+<section class="container mb-5">
+    <h2 class="fw-bold  mb-4">@tytul</h2>
+    <div class="row g-3">
+        @await Html.PartialAsync("BigPromocja", (Firma.Data.Data.Sklep.ProduktPromocja)ViewBag.ModelBigPromocji)
+        <div class="col-sm-12 col-lg-9  index-section">
+            <div class="row g-3">
+                @await Html.PartialAsync("Promocje", (IEnumerable<Firma.Data.Data.Sklep.ProduktPromocja>)ViewBag.ModelPromocji)
+            </div>
+        </div>
+    </div>
+</section>

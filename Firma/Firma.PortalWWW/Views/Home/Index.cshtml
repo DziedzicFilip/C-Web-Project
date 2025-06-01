@@ -1,31 +1,33 @@
 ﻿@model Firma.Data.Data.CMS.Strona
-
 <main class="container-fluid p-0">
    
-    <section class="container mb-5">
-        <h2 class="fw-bold  mb-4">Aktualne Promocje</h2>
-        <div class="row g-3">
-            @await Html.PartialAsync("BigPromocja", (Firma.Data.Data.Sklep.ProduktPromocja)ViewBag.ModelBigPromocji)
-            <div class="col-sm-12 col-lg-9  index-section">
-                <div class="row g-3">
-                    @await Html.PartialAsync("Promocje", (IEnumerable<Firma.Data.Data.Sklep.ProduktPromocja>)ViewBag.ModelPromocji)
-                </div>
-            </div>
-        </div>
-    </section>
+    @await Html.PartialAsync("AktualnePromocje", (IEnumerable<Firma.Data.Data.CMS.Aktualnosc>)ViewBag.Aktualnosci)
 
+    @* <section class="container mb-5"> *@
+    @*     <h2 class="fw-bold  mb-4">Aktualne Promocje</h2> *@
+    @*     <div class="row g-3"> *@
+    @*         @await Html.PartialAsync("BigPromocja", (Firma.Data.Data.Sklep.ProduktPromocja)ViewBag.ModelBigPromocji) *@
+    @*         <div class="col-sm-12 col-lg-9  index-section"> *@
+    @*             <div class="row g-3"> *@
+    @*                 @await Html.PartialAsync("Promocje", (IEnumerable<Firma.Data.Data.Sklep.ProduktPromocja>)ViewBag.ModelPromocji) *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </section> *@
 
-    <section class="container mb-5">
-        <h2 class="fw-bold  mb-4">Popularne</h2>
-        @await Html.PartialAsync("Popularne", (IEnumerable<Firma.Data.Data.Sklep.Towar>)ViewBag.ModelPopularne)
-    </section>
-    <section class="container mb-5">
-        <h2 class="fw-bold  mb-4">Polecane dla Ciebie</h2>
-        <div class="row g-3  ">
-            @await Html.PartialAsync("DlaCiebie", (IEnumerable<Firma.Data.Data.Sklep.Towar>)ViewBag.ModelDlaCiebie)
+    @await Html.PartialAsync("PopularneTitle", (IEnumerable<Firma.Data.Data.CMS.Aktualnosc>)ViewBag.Aktualnosci)
+    @* <section class="container mb-5"> *@
+    @*     <h2 class="fw-bold  mb-4">Popularne</h2> *@
+    @*     @await Html.PartialAsync("Popularne", (IEnumerable<Firma.Data.Data.Sklep.Towar>)ViewBag.ModelPopularne) *@
+    @* </section> *@
+    @await Html.PartialAsync("DlaCiebieTitle", (IEnumerable<Firma.Data.Data.CMS.Aktualnosc>)ViewBag.Aktualnosci)
+    @* <section class="container mb-5"> *@
+    @*     <h2 class="fw-bold  mb-4">Polecane dla Ciebie</h2> *@
+    @*     <div class="row g-3  "> *@
+    @*         @await Html.PartialAsync("DlaCiebie", (IEnumerable<Firma.Data.Data.Sklep.Towar>)ViewBag.ModelDlaCiebie) *@
             
-        </div>
-    </section> 
+    @*     </div> *@
+    @* </section>  *@
     <!-- 
     <section class="container mb-5">
         <h2 class="fw-bold  mb-4">Popularne </h2>

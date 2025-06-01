@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.Aktualnosc>
+@{
+    if (Model == null)
+    {
+        return;
+    }
+    var aktualnosci = ViewBag.Aktualnosci as List<Firma.Data.Data.CMS.Aktualnosc>;
+    var tytul = aktualnosci?.FirstOrDefault(x => x.Pozycja == 3)?.Tytul;
+}
+<section class="container mb-5">
+    <h2 class="fw-bold  mb-4">@tytul</h2>
+    <div class="row g-3  ">
+        @await Html.PartialAsync("DlaCiebie", (IEnumerable<Firma.Data.Data.Sklep.Towar>)ViewBag.ModelDlaCiebie)
+
+    </div>
+</section>

@@ -1,15 +1,17 @@
 ﻿
+
 @{
     ViewData["Title"] = "Kontakt";
+
 }
 
 <div class="container mt-5">
-    <h1 class="fw-bold mb-4">Kontakt - Voltix</h1>
-    <p class="text-muted">
-        Skontaktuj się z nami, aby uzyskać więcej informacji na temat naszych usług, produktów lub rozwiązań dostosowanych do Twoich potrzeb. Jesteśmy tutaj, aby pomóc!
-    </p>
-
-
+    
+   
+     <h1 class="fw-bold mb-4">Kontakt - Voltix</h1>
+     <p class="text-muted"> 
+         Skontaktuj się z nami, aby uzyskać więcej informacji na temat naszych usług, produktów lub rozwiązań dostosowanych do Twoich potrzeb. Jesteśmy tutaj, aby pomóc! 
+     </p> 
     <div class="row mb-5">
         @await Html.PartialAsync("KontaktInfo", (IEnumerable<Firma.Data.Data.CMS.Kontakt>)ViewBag.ModelKontakt)
     </div>

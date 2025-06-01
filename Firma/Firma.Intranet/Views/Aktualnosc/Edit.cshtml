@@ -1,11 +1,11 @@
 ﻿@model Firma.Data.Data.CMS.Aktualnosc
 
 @{
-    ViewData["Title"] = "Edytuj Aktualność";
+    ViewData["Title"] = "Edytuj Nagłówek";
 }
 
 <div class="mt-4">
-    <h2 class="mb-4 fw-bold">Edytuj Aktualność</h2>
+    <h2 class="mb-4 fw-bold">Edytuj Nagłówek</h2>
     <div class="card shadow-sm border-0">
         <div class="card-body">
             <form asp-action="Edit">
@@ -20,13 +20,13 @@
 
                 <div class="mb-3">
                     <label asp-for="Tytul" class="form-label"></label>
-                    <input asp-for="Tytul" class="form-control" placeholder="Wpisz tytuł aktualności..." />
+                    <input asp-for="Tytul" class="form-control" placeholder="Wpisz tytuł " />
                     <span asp-validation-for="Tytul" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="Tresc" class="form-label"></label>
-                    <textarea asp-for="Tresc" class="form-control" rows="5" placeholder="Wpisz treść aktualności..."></textarea>
+                    <textarea asp-for="Tresc" class="form-control" rows="5" placeholder="Wpisz treść "></textarea>
                     <span asp-validation-for="Tresc" class="text-danger"></span>
                 </div>
 

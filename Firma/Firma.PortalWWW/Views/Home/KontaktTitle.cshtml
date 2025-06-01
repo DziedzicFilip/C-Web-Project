@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Firma.Data.Data.CMS.Aktualnosc>
+@{
+    if (Model == null)
+    {
+        return;
+    }
+    var aktualnosci = ViewBag.Aktualnosci as List<Firma.Data.Data.CMS.Aktualnosc>;
+    var tytul = aktualnosci?.FirstOrDefault(x => x.Pozycja == 4)?.Tytul;
+    @if (aktualnosci == null)
+    {
+        <p>Brak danych w ViewBag.Aktualnosci</p>
+    }
+    else if (!aktualnosci.Any(x => x.Pozycja == 4))
+    {
+        <p>Nie znaleziono aktualności z Pozycja == 4</p>
+    }
+}
+<h1 class="fw-bold mb-4">@tytul</h1>
+<p class="text-muted">
+    Skontaktuj się z nami, aby uzyskać więcej informacji na temat naszych usług, produktów lub rozwiązań dostosowanych do Twoich potrzeb. Jesteśmy tutaj, aby pomóc!
+</p>

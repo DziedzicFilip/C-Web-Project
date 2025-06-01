@@ -85,6 +85,11 @@ namespace Firma.PortalWWW.Controllers
                 select towar 
                 ).Take(6).ToList();
 
+            ViewBag.Aktualnosci = (
+                from aktualnosc in _context.Aktualnosc
+                   orderby aktualnosc.Pozycja
+                select aktualnosc
+            ).ToList();
 
 
             var item = await GetStronaWithModelStronyAsync(id);
@@ -238,7 +243,7 @@ namespace Firma.PortalWWW.Controllers
             {
                 DataZamowienia = DateTime.Now,
                 IdUzytkownika = userId,
-                CzyZrealizowane = false,
+                CzyZrealizowane = true,
                 CzyAnulowane = false,
                 SposobPlatnosci = "Karta",
                 IdTowaru = towar.idTowar,
