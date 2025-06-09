@@ -6,15 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Firma.Data.Data
 {
-    public class FirmaContext : DbContext
+    public class FirmaContext : IdentityDbContext<ApplicationUser>
     {
-        public FirmaContext(DbContextOptions<FirmaContext> options)
-            : base(options)
-        {
-        }
+        public FirmaContext(DbContextOptions<FirmaContext> options) : base(options) { }
 
         public DbSet<Aktualnosc> Aktualnosc { get; set; } = default!;
         public DbSet<Rodzaj> Rodzaj { get; set; } = default!;
