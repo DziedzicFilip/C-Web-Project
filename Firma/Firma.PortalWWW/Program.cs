@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using Firma.Data.Data;
-using Microsoft.AspNetCore.Identity;
 using Firma.Data.Data.Sklep;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,12 +45,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // ✅ Musi być przed Authorization
+app.UseAuthentication(); // Musi być przed UseAuthorization
 app.UseAuthorization();
 
 // Routing
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapRazorPages();
 app.Run();

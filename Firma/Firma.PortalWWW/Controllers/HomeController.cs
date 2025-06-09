@@ -1,12 +1,11 @@
 using System.Diagnostics;
-using AspNetCoreGeneratedDocument;
 using Firma.Data.Data;
 using Firma.Data.Data.CMS;
 using Firma.Data.Data.Sklep;
 using Firma.PortalWWW.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Firma.PortalWWW.Controllers
 {
@@ -179,30 +178,8 @@ namespace Firma.PortalWWW.Controllers
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item);
         }
-
-        public async Task<IActionResult> Konto(int? id)
-        {
-            int userId = 1;
-
-            ViewBag.User = (
-                from uzytkownik in _context.Uzytkownik
-                select uzytkownik
-            ).FirstOrDefault();
-            ViewBag.ZamowieniaUser = (
-                from z in _context.Zamowienie
-                where z.IdUzytkownika == userId
-                orderby z.DataZamowienia descending
-                select z)
-                        .Include(z => z.Towar).ToList(); 
-            ViewBag.RecenzjeUser = (
-                from r in _context.Recenzja
-                where r.IdUzytkownika == userId
-                orderby r.DataDodania descending
-                select r)
-                        .Include(r => r.Towar).ToList();
-            var item = await GetStronaWithModelStronyAsync(id);
-            return View(item);
-        }
+       
+      
         public async Task<IActionResult> Zamow(
     int idTowaru, int ilosc, string miasto, string ulica, string kodPocztowy,
     string kraj, string telefon, string email, string? uwagi)
@@ -303,5 +280,32 @@ namespace Firma.PortalWWW.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [Authorize]
+        public async Task<IActionResult> Konto(int? id)
+        {
+            int userId = 1;
+
+            ViewBag.User = (
+                from uzytkownik in _context.Uzytkownik
+                select uzytkownik
+            ).FirstOrDefault();
+            ViewBag.ZamowieniaUser = (
+                from z in _context.Zamowienie
+                where z.IdUzytkownika == userId
+                orderby z.DataZamowienia descending
+                select z)
+                        .Include(z => z.Towar).ToList();
+            ViewBag.RecenzjeUser = (
+                from r in _context.Recenzja
+                where r.IdUzytkownika == userId
+                orderby r.DataDodania descending
+                select r)
+                        .Include(r => r.Towar).ToList();
+            var item = await GetStronaWithModelStronyAsync(id);
+            return View(item);
+        }
     }
+
+
+
 }

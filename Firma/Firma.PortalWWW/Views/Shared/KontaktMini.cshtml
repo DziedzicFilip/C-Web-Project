@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Firma.Data.Data.CMS.Kontakt>
 <h5>Kontakt</h5>
+@if (Model != null)
 @foreach (var item in Model)
 {
     <p>Email: @item.Email<br>Telefon: @item.Telefon</p>
