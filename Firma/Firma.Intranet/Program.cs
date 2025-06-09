@@ -21,7 +21,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
 .AddRoles<IdentityRole>()  // <-- Dodaj wsparcie dla ról
 .AddEntityFrameworkStores<FirmaContext>();
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});
 // Ustawienie kultury PL
 var cultureInfo = new CultureInfo("pl-PL");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
