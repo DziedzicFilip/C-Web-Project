@@ -18,7 +18,19 @@
         }
         else
         {
-            
+
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ul class="navbar-nav">
+            <form id="logoutForm" method="post" asp-area="Identity" asp-page="/Account/Logout" style="display:none;">
+            </form>
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
+                         Wyloguj
+                    </a>
+                </li>
+            </ul>
         }
 
     </ul>

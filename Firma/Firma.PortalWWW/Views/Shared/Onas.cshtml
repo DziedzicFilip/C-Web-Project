@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<Firma.Data.Data.CMS.Onas>
     <h5>O nas</h5>
+    @{
+    if (Model != null)
+    
     @foreach (var item in Model)
     {
 
     <p>@item.Description</p>
     }
+}

@@ -60,8 +60,25 @@
             <a asp-area="" asp-controller="Regualmin" asp-action="Index"> <img src="~/images/regulamin.png" alt="zamowienia-icon" /> Regulamin</a>
             
             <div class="user-info">
-                <p>Zalogowany: User</p>
-                <a asp-area="" asp-controller="#" asp-action="Index"><img src="~/images/export.png" alt="logout-icon" /> Wyloguj</a>
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <p>Zalogowany: @User.Identity.Name</p>
+                        <form id="logoutForm" method="post" asp-area="Identity" asp-page="/Account/Logout" style="display:none;">
+                        </form>
+                        <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
+                            <img src="~/images/export.png" alt="logout-icon" /> Wyloguj
+                        </a>
+                    }
+                    else
+                    {
+                        <p>Niezalogowany</p>
+                    }
+                }
+             
+               
+               
+
                 <a asp-area="" asp-controller="#" asp-action="Index"><img src="~/images/settings.png" alt="ustawinia-icon" />Ustawienia</a>
             </div>
         </div>

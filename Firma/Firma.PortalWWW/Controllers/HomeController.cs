@@ -1,12 +1,12 @@
 using System.Diagnostics;
-using AspNetCoreGeneratedDocument;
 using Firma.Data.Data;
 using Firma.Data.Data.CMS;
 using Firma.Data.Data.Sklep;
 using Firma.PortalWWW.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Firma.PortalWWW.Controllers
 {
@@ -14,15 +14,17 @@ namespace Firma.PortalWWW.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly FirmaContext _context;
-        public HomeController(ILogger<HomeController> logger,FirmaContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public HomeController(ILogger<HomeController> logger, FirmaContext context, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
-        
+
         private async Task<Strona?> GetStronaWithModelStronyAsync(int? id)
         {
-            
+
             ViewBag.ModelStrony = (
                 from strona in _context.Strona
                 orderby strona.Pozycja
@@ -33,7 +35,7 @@ namespace Firma.PortalWWW.Controllers
                 from baner in _context.Baner
                 select baner
             ).ToList();
-           
+
             ViewBag.ModelLinki = (
                 from linki in _context.PrzydatneLinki
                 select linki
@@ -53,7 +55,7 @@ namespace Firma.PortalWWW.Controllers
                 id = 1;
             }
 
-            
+
             return await _context.Strona.FindAsync(id);
         }
 
@@ -68,7 +70,7 @@ namespace Firma.PortalWWW.Controllers
                         .Include(pp => pp.Towar)
                         .Include(pp => pp.Promocja)
                                         select pp).FirstOrDefault();
-           
+
             var zamowienia = (from z in _context.Zamowienie
                               join t in _context.Towar on z.Towar.idTowar equals t.idTowar
                               select new { Zamowienie = z, Towar = t }).ToList();
@@ -82,12 +84,12 @@ namespace Firma.PortalWWW.Controllers
             ViewBag.ModelDlaCiebie = (
                 from towar in _context.Towar
                 orderby towar.idTowar descending
-                select towar 
+                select towar
                 ).Take(6).ToList();
 
             ViewBag.Aktualnosci = (
                 from aktualnosc in _context.Aktualnosc
-                   orderby aktualnosc.Pozycja
+                orderby aktualnosc.Pozycja
                 select aktualnosc
             ).ToList();
 
@@ -105,7 +107,8 @@ namespace Firma.PortalWWW.Controllers
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item);
         }
-        public async Task<IActionResult> Przeglad(int? id) {
+        public async Task<IActionResult> Przeglad(int? id)
+        {
 
             ViewBag.ModelProdukty = (
                 from towar in _context.Towar
@@ -147,25 +150,25 @@ namespace Firma.PortalWWW.Controllers
 
             if (id_towaru == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
             var towar = await _context.Towar.FindAsync(id_towaru);
             if (towar == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
-            return View(towar); 
+            return View(towar);
         }
 
         public async Task<IActionResult> Kontakt(int? id)
         {
-                        ViewBag.ModelKontakt = (
-                from kontakt in _context.Kontakt
-                
-                select kontakt
-            ).ToList();
+            ViewBag.ModelKontakt = (
+    from kontakt in _context.Kontakt
+
+    select kontakt
+).ToList();
 
             var item = await GetStronaWithModelStronyAsync(id);
             return View(item); ;
@@ -180,29 +183,7 @@ namespace Firma.PortalWWW.Controllers
             return View(item);
         }
 
-        public async Task<IActionResult> Konto(int? id)
-        {
-            int userId = 1;
-
-            ViewBag.User = (
-                from uzytkownik in _context.Uzytkownik
-                select uzytkownik
-            ).FirstOrDefault();
-            ViewBag.ZamowieniaUser = (
-                from z in _context.Zamowienie
-                where z.IdUzytkownika == userId
-                orderby z.DataZamowienia descending
-                select z)
-                        .Include(z => z.Towar).ToList(); 
-            ViewBag.RecenzjeUser = (
-                from r in _context.Recenzja
-                where r.IdUzytkownika == userId
-                orderby r.DataDodania descending
-                select r)
-                        .Include(r => r.Towar).ToList();
-            var item = await GetStronaWithModelStronyAsync(id);
-            return View(item);
-        }
+        
         public async Task<IActionResult> Zamow(
     int idTowaru, int ilosc, string miasto, string ulica, string kodPocztowy,
     string kraj, string telefon, string email, string? uwagi)
@@ -233,8 +214,23 @@ namespace Firma.PortalWWW.Controllers
                 select kontakt
             ).ToList();
             #endregion
-
-            int userId = 1;
+            if (!User.Identity.IsAuthenticated)
+            {
+                // Zbuduj query string z parametrami zamówienia
+                var query = $"?idTowaru={idTowaru}" +
+             $"&ilosc={ilosc}" +
+             $"&miasto={Uri.EscapeDataString(miasto ?? string.Empty)}" +
+             $"&ulica={Uri.EscapeDataString(ulica ?? string.Empty)}" +
+             $"&kodPocztowy={Uri.EscapeDataString(kodPocztowy ?? string.Empty)}" +
+             $"&kraj={Uri.EscapeDataString(kraj ?? string.Empty)}" +
+             $"&telefon={Uri.EscapeDataString(telefon ?? string.Empty)}" +
+             $"&email={Uri.EscapeDataString(email ?? string.Empty)}" +
+             $"&uwagi={Uri.EscapeDataString(uwagi ?? string.Empty)}"; var returnUrl = Url.Action("Zamow", "Home") + query;
+                return RedirectToPage("/Account/Login", new { area = "Identity", returnUrl });
+            }
+            var userId = _userManager.GetUserId(User);
+            var uzytkownik = await _context.Uzytkownik
+                .FirstOrDefaultAsync(u => u.ApplicationUserId == userId);
             var towar = await _context.Towar.FindAsync(idTowaru);
             if (towar == null)
                 return NotFound();
@@ -242,8 +238,8 @@ namespace Firma.PortalWWW.Controllers
             var zamowienie = new Zamowienie
             {
                 DataZamowienia = DateTime.Now,
-                IdUzytkownika = userId,
-                CzyZrealizowane = true,
+                IdUzytkownika = uzytkownik.IdUzytkownika,
+                CzyZrealizowane = false,
                 CzyAnulowane = false,
                 SposobPlatnosci = "Karta",
                 IdTowaru = towar.idTowar,
@@ -251,7 +247,7 @@ namespace Firma.PortalWWW.Controllers
                 Miasto = miasto,
                 Ulica = ulica,
                 KodPocztowy = kodPocztowy,
-                
+
             };
 
             _context.Zamowienie.Add(zamowienie);
@@ -303,5 +299,35 @@ namespace Firma.PortalWWW.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [Authorize]
+        public async Task<IActionResult> Konto(int? id)
+        {
+            // Pobierz ID aktualnie zalogowanego u¿ytkownika (Identity)
+            var userId = _userManager.GetUserId(User);
+
+            // Pobierz powi¹zanego u¿ytkownika sklepu (Uzytkownik)
+            var uzytkownik = await _context.Uzytkownik
+                .FirstOrDefaultAsync(u => u.ApplicationUserId == userId);
+
+            ViewBag.User = uzytkownik;
+
+            ViewBag.ZamowieniaUser = await _context.Zamowienie
+                .Where(z => z.IdUzytkownika == uzytkownik.IdUzytkownika)
+                .OrderByDescending(z => z.DataZamowienia)
+                .Include(z => z.Towar)
+                .ToListAsync();
+
+            ViewBag.RecenzjeUser = await _context.Recenzja
+                .Where(r => r.IdUzytkownika == uzytkownik.IdUzytkownika)
+                .OrderByDescending(r => r.DataDodania)
+                .Include(r => r.Towar)
+                .ToListAsync();
+
+            var item = await GetStronaWithModelStronyAsync(id);
+            return View(item);
+        }
     }
-}
+
+
+
+    }
