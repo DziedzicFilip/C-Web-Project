@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Firma.Data.Data.Sklep;
 using Firma.Data.Data;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 namespace Firma.PortalWWW.Areas.Identity.Pages.Account
 {
     public class LogoutModel : BaseIdentityPageModel
@@ -24,7 +25,12 @@ namespace Firma.PortalWWW.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public async Task<IActionResult> OnPost(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null)
+        {
+            LoadCommonData();
+            
+        }
+        public async Task<IActionResult> OnPost(string returnUrl = "~/")
         {
             LoadCommonData();
             await _signInManager.SignOutAsync();
