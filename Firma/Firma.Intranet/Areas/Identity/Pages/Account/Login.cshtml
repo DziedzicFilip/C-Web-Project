@@ -5,39 +5,38 @@
     ViewData["Title"] = "Logowanie";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
 
-<div class="col-md-4">
-    <section>
-        <form id="account" method="post">
-            <h2>Użyj lokalnego konta, aby się zalogować.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-         
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="adres@example.com" />
-                <label asp-for="Input.Email" class="form-label">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="hasło" />
-                <label asp-for="Input.Password" class="form-label">Hasło</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            
-            <div>
-                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Zaloguj się</button>
-            </div>
-            <div>
-                <p>
-                    <a id="forgot-password" asp-page="./ForgotPassword">Nie pamiętasz hasła?</a>
-                </p>
-                <p>
-                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Wyślij ponownie potwierdzenie email</a>
-                </p>
-            </div>
-        </form>
-    </section>
+<div class="d-flex justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <section>
+            <form id="account" method="post">
+                <h2 class="text-center mb-3">Użyj lokalnego konta, aby się zalogować.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="adres@example.com" />
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" type="password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="hasło" />
+                    <label asp-for="Input.Password" class="form-label">Hasło</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Zaloguj się</button>
+                </div>
+                <div class="text-center mt-3">
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Nie pamiętasz hasła?</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
 </div>
 
 @section Scripts {

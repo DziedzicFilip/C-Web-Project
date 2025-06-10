@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Firma.Data.Data;
 using Firma.Data.Data.CMS;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Firma.Intranet.Controllers
 {
+    [Authorize]
     public class PolitykaPrywatnosciController : Controller
     {
         private readonly FirmaContext _context;
