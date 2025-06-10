@@ -48,7 +48,7 @@
                                  alt="@item.Nazwa">
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-bold">@item.Nazwa</h5>
-                                <p class="card-text text-muted mb-2" style="min-height:40px;">@item.Opis</p>
+                                <p class="card-text text-muted mb-2" style="min-height:40px;">@Html.Raw(@item.Opis)</p>
                                 <p><strong>Kod:</strong> @item.Kod</p>
                                 <p><strong>Rodzaj:</strong> @item.Rodzaj?.Nazwa</p>
                                 <p><strong>Cena:</strong> @item.Cena.ToString("C")</p>
