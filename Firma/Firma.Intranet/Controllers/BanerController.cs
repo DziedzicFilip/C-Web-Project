@@ -56,16 +56,34 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdBanera,Tytul,Zawartosc,UrlObrazka,DataPoczatkowa,DataZakonczenia,CzyAktywny")] Baner baner)
+        public async Task<IActionResult> Create([Bind("IdBanera,Tytul,Zawartosc,DataPoczatkowa,DataZakonczenia,CzyAktywny")] Baner baner, IFormFile plik)
         {
             if (ModelState.IsValid)
             {
+                if (plik != null && plik.Length > 0)
+                {
+                    string sciezkaFolder = @"D:\Studia\WSB\IAB\C-Web-Project\Firma\Firma.Intranet\wwwroot\images\Banners";
+                    string fileName = Guid.NewGuid() + "_" + Path.GetFileName(plik.FileName);
+                    string filePath = Path.Combine(sciezkaFolder, fileName);
+
+                    if (!Directory.Exists(sciezkaFolder))
+                        Directory.CreateDirectory(sciezkaFolder);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await plik.CopyToAsync(stream);
+                    }
+
+                    baner.UrlObrazka = Path.Combine("images", "Banners", fileName).Replace("\\", "/");
+                }
+
                 _context.Add(baner);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(baner);
         }
+
 
         // GET: Baner/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -88,35 +106,45 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdBanera,Tytul,Zawartosc,UrlObrazka,DataPoczatkowa,DataZakonczenia,CzyAktywny")] Baner baner)
+        public async Task<IActionResult> Edit(int id, [Bind("IdBanera,Tytul,Zawartosc,DataPoczatkowa,DataZakonczenia,CzyAktywny")] Baner baner, IFormFile plik)
         {
             if (id != baner.IdBanera)
-            {
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
-                try
+                var banerDb = await _context.Baner.AsNoTracking().FirstOrDefaultAsync(b => b.IdBanera == id);
+                if (banerDb == null)
+                    return NotFound();
+
+                if (plik != null && plik.Length > 0)
                 {
-                    _context.Update(baner);
-                    await _context.SaveChangesAsync();
+                    string sciezkaFolder = @"D:\Studia\WSB\IAB\C-Web-Project\Firma\Firma.Intranet\wwwroot\images\Banners";
+                    string fileName = Guid.NewGuid() + "_" + Path.GetFileName(plik.FileName);
+                    string filePath = Path.Combine(sciezkaFolder, fileName);
+
+                    if (!Directory.Exists(sciezkaFolder))
+                        Directory.CreateDirectory(sciezkaFolder);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await plik.CopyToAsync(stream);
+                    }
+
+                    baner.UrlObrazka = Path.Combine("images", "Banners", fileName).Replace("\\", "/");
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!BanerExists(baner.IdBanera))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    baner.UrlObrazka = banerDb.UrlObrazka;
                 }
+
+                _context.Update(baner);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(baner);
         }
+
 
         // GET: Baner/Delete/5
         public async Task<IActionResult> Delete(int? id)

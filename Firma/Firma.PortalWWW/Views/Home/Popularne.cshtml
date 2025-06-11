@@ -4,7 +4,7 @@
 {
     <div class="col-md-2">
         <div class="card h-100 shadow-sm border-0">
-            <img src="@item.FotoUrl" alt="Produkt 1" class="card-img-top p-3">
+                <img src="@(!string.IsNullOrEmpty(item.FotoUrl) ? item.FotoUrl : "~/images/Products/default.png")" alt="" class="card-img-top p-3">
             <div class="card-body">
                 <h6>@item.Nazwa</h6>
                 <p><strong>Cena:</strong> @item.Cena zł</p>

@@ -13,7 +13,8 @@
 }
 <div class="col-sm-12 col-lg-3  index-section">
     <div class="card h-100 shadow-sm border-0 bg-light d-flex flex-column justify-content-between">
-        <img src="@Model.Towar?.FotoUrl" alt="" class="card-img-top p-3">
+      
+        <img src="@(!string.IsNullOrEmpty(Model.Towar?.FotoUrl) ? Model.Towar?.FotoUrl : "~/images/Products/default.png")" alt="" class="card-img-top p-3">
         <div class="card-body text-center">
             <h5>@Model.Towar?.Nazwa</h5>
             <p><strong>Aktualna Cena:</strong> @cenaPo</p>

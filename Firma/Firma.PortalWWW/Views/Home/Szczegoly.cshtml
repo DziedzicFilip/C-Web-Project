@@ -133,8 +133,8 @@
             <div class="product-main-card">
                 <div class="product-gallery">
                     <div class="product-image" id="mainProductImage">
-                        <img src="@Model.FotoUrl" alt="@Model.Nazwa" id="mainImageTag" />
-                    </div>
+                        <img src="@(!string.IsNullOrEmpty(Model.FotoUrl) ? Model.FotoUrl : "~/images/Products/default.png")" id="mainImageTag" />
+                </div>
 
                 </div>
 

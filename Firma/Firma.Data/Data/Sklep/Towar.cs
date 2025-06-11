@@ -38,8 +38,7 @@ namespace Firma.Data.Data.Sklep
         public ICollection<Recenzja> Recenzje { get; set; } = new List<Recenzja>();
         public ICollection<ProduktPromocja>? ProduktyPromocji { get; set; }
 
-     
-        [Display(Name = "Waga (kg)")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? Waga { get; set; }
 
         [Display(Name = "Wymiary (DłxSzxWy)")]

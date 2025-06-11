@@ -19,8 +19,8 @@ namespace Firma.Data.Data.CMS
         [MaxLength(500)]
         public string Zawartosc { get; set; } = string.Empty;
 
-        [Required]
-        [Url]
+        
+        
         public string UrlObrazka { get; set; } = string.Empty;
 
         [Display(Name = "Data początkowa")]

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -25,5 +25,14 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
-
+	<Target Name="CopyBannersToPortalWWW" AfterTargets="Build">
+		<ItemGroup>
+			<BannerImages Include="wwwroot\images\**\*.*" />
+		</ItemGroup>
+		<Copy
+		  SourceFiles="@(BannerImages)"
+		  DestinationFolder="..\Firma.PortalWWW\wwwroot\images\%(RecursiveDir)"
+		  SkipUnchangedFiles="true"
+    />
+	</Target>
 </Project>
