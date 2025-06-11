@@ -59,10 +59,33 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idTowar,Nazwa,Kod,Cena,FotoUrl,Opis,Ilosc,idRodzaju,Waga,Wymiary,Kolor,Material,Producent,KrajProdukcji,GwarancjaMiesiace,Model,Stan")] Towar towar)
+        public async Task<IActionResult> Create(Towar towar, List<IFormFile> pliki)
         {
             if (ModelState.IsValid)
             {
+                if (pliki != null && pliki.Count > 0)
+                {
+                    var plik = pliki[0];
+                    if (plik != null && plik.Length > 0)
+                    {
+                        // Absolute path for saving the file
+                        string sciezkaFolder = @"D:\Studia\WSB\IAB\C-Web-Project\Firma\Firma.Intranet\wwwroot\images\Products";
+                        string fileName = Guid.NewGuid() + "_" + Path.GetFileName(plik.FileName);
+                        string filePath = Path.Combine(sciezkaFolder, fileName);
+
+                        if (!Directory.Exists(sciezkaFolder))
+                            Directory.CreateDirectory(sciezkaFolder);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await plik.CopyToAsync(stream);
+                        }
+
+                        // Save relative path for use in the app (for <img src="...">)
+                        towar.FotoUrl = Path.Combine("images", "Products", fileName).Replace("\\", "/");
+                    }
+                }
+
                 _context.Add(towar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -93,7 +116,7 @@ namespace Firma.Intranet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("idTowar,Nazwa,Kod,Cena,FotoUrl,Opis,Ilosc,idRodzaju,Waga,Wymiary,Kolor,Material,Producent,KrajProdukcji,GwarancjaMiesiace,Model,Stan")] Towar towar)
+        public async Task<IActionResult> Edit(int id, [Bind("idTowar,Nazwa,Kod,Cena,FotoUrl,Opis,Ilosc,idRodzaju,Waga,Wymiary,Kolor,Material,Producent,KrajProdukcji,GwarancjaMiesiace,Model,Stan")] Towar towar, List<IFormFile> pliki)
         {
             if (id != towar.idTowar)
             {
@@ -104,6 +127,35 @@ namespace Firma.Intranet.Controllers
             {
                 try
                 {
+                    // Pobierz oryginalny rekord z bazy
+                    var towarDb = await _context.Towar.AsNoTracking().FirstOrDefaultAsync(t => t.idTowar == id);
+                    if (towarDb == null)
+                        return NotFound();
+
+                    // Jeśli przesłano nowe zdjęcie, zapisz je i zaktualizuj FotoUrl
+                    if (pliki != null && pliki.Count > 0 && pliki[0]?.Length > 0)
+                    {
+                        var plik = pliki[0];
+                        string sciezkaFolder = @"D:\Studia\WSB\IAB\C-Web-Project\Firma\Firma.Intranet\wwwroot\images\Products";
+                        string fileName = Guid.NewGuid() + "_" + Path.GetFileName(plik.FileName);
+                        string filePath = Path.Combine(sciezkaFolder, fileName);
+
+                        if (!Directory.Exists(sciezkaFolder))
+                            Directory.CreateDirectory(sciezkaFolder);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await plik.CopyToAsync(stream);
+                        }
+
+                        towar.FotoUrl = Path.Combine("images", "Products", fileName).Replace("\\", "/");
+                    }
+                    else
+                    {
+                        // Jeśli nie przesłano nowego pliku, zachowaj stare FotoUrl
+                        towar.FotoUrl = towarDb.FotoUrl;
+                    }
+
                     _context.Update(towar);
                     await _context.SaveChangesAsync();
                 }
@@ -123,6 +175,7 @@ namespace Firma.Intranet.Controllers
             ViewData["idRodzaju"] = new SelectList(_context.Rodzaj, "IdRodzaju", "Nazwa", towar.idRodzaju);
             return View(towar);
         }
+
 
         // GET: Towar/Delete/5
         public async Task<IActionResult> Delete(int? id)

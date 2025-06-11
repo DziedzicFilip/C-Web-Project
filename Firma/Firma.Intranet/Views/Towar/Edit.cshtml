@@ -8,7 +8,7 @@
     <h2 class="mb-4 fw-bold">Edytuj produkt</h2>
     <div class="card shadow-sm border-0" style="max-width: 650px; margin: 0 auto;">
         <div class="card-body">
-            <form asp-action="Edit">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 <input type="hidden" asp-for="idTowar" />
 
@@ -39,8 +39,17 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="FotoUrl" class="form-label"></label>
-                    <input asp-for="FotoUrl" class="form-control" />
+                    <label class="form-label">Aktualne zdjęcie</label>
+                    @if (!string.IsNullOrEmpty(Model.FotoUrl))
+                    {
+                        <div>
+                            <img src="~/@Model.FotoUrl" alt="Aktualne zdjęcie" style="max-width: 200px;" />
+                        </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Zmień zdjęcie</label>
+                    <input type="file" name="pliki" accept=".jpg,.png" class="form-control" />
                     <span asp-validation-for="FotoUrl" class="text-danger"></span>
                 </div>
 
