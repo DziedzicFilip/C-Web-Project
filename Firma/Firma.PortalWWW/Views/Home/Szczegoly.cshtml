@@ -133,7 +133,8 @@
             <div class="product-main-card">
                 <div class="product-gallery">
                     <div class="product-image" id="mainProductImage">
-                        <img src="@(!string.IsNullOrEmpty(Model.FotoUrl) ? Model.FotoUrl : "~/images/Products/default.png")" id="mainImageTag" />
+                        <img src="@(string.IsNullOrEmpty(Model.FotoUrl) ? Url.Content("~/images/Products/default.png") : Url.Content("~/" + Model.FotoUrl))" alt="" class="card-img-top p-3">
+
                 </div>
 
                 </div>
