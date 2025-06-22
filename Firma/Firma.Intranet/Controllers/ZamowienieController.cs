@@ -169,5 +169,6 @@ namespace Firma.Intranet.Controllers
         {
             return _context.Zamowienie.Any(e => e.IdZamowienia == id);
         }
+
     }
 }

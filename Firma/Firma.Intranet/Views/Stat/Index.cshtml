@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Firma.Data.Data.Sklep.Zamowienie>
+@{
+    ViewData["Title"] = "Dashboard Statystyk";
+    var dataOd = Context.Request.Query["dataOd"].FirstOrDefault();
+    var dataDo = Context.Request.Query["dataDo"].FirstOrDefault();
+}
+
+
+
+<div class="mt-4">
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Sprzedaż dzisiaj</h5>
+                    <p class="display-6 text-primary">
+                        @(ViewBag.SprzedazDzisiaj != null ? ((decimal)ViewBag.SprzedazDzisiaj).ToString("C") : "-")
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Produkty sprzedane dzis</h5>
+                    <p class="display-6 text-danger">
+                        @ViewBag.ProduktySprzedaneDzisiaj
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body">
+                    <form method="post" asp-action="GenerujRaport" class="mb-4">
+                        <input type="hidden" name="dataOd" value="@dataOd" />
+                        <input type="hidden" name="dataDo" value="@dataDo" />
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-download"></i> Generuj raport CSV
+                        </button>
+                    </form>
+                    <form method="post" asp-action="GenerujRaportPdf" class="mb-2">
+                        <input type="hidden" name="dataOd" value="@dataOd" />
+                        <input type="hidden" name="dataDo" value="@dataDo" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-file-earmark-pdf"></i> Generuj raport PDF
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card text-center shadow-sm border-0">
+                <div class="card-body">
+            <form method="get" asp-action="Index" class="row g-3 mb-4">
+                <div class="col-auto">
+                    <label for="dataOd" class="col-form-label">Data od:</label>
+                
+                    <input type="date" id="dataOd" name="dataOd" class="form-control" value="@dataOd" />
+                
+                
+                    <label for="dataDo" class="col-form-label">Data do:</label>
+              
+                            <label for="dataDo" class="col-form-label">Data do:</label>
+                    <input type="date" id="dataDo" name="dataDo" class="form-control" value="@dataDo" />
+                
+                    <button type="submit" class="btn btn-primary">Filtruj</button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+     
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Najczęściej zamawiany towar (30 dni)</h5>
+                    <p>
+                        <b>@ViewBag.NajczesciejTowar</b>
+                        <br />
+                        Ilość: <b>@ViewBag.NajczesciejTowarIlosc</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Najrzadziej zamawiany towar (30 dni)</h5>
+                    <p>
+                        <b>@ViewBag.NajrzadziejTowar</b>
+                        <br />
+                        Ilość: <b>@ViewBag.NajrzadziejTowarIlosc</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Najczęściej zamawiane miasto</h5>
+                    <p>
+                        <b>@ViewBag.NajczesciejMiasto</b>
+                        <br />
+                        Kod pocztowy: <b>@ViewBag.NajczesciejKod</b>
+                        <br />
+                        Liczba zamówień: <b>@ViewBag.NajczesciejMiastoIlosc</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Najrzadziej zamawiane miasto</h5>
+                    <p>
+                        <b>@ViewBag.NajrzadziejMiasto</b>
+                        <br />
+                        Kod pocztowy: <b>@ViewBag.NajrzadziejKod</b>
+                        <br />
+                        Liczba zamówień: <b>@ViewBag.NajrzadziejMiastoIlosc</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Szczegóły zamówień</h5>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Produkt</th>
+                                <th>Ilość</th>
+                                <th>Przychód</th>
+                                <th>Data sprzedaży</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                int idx = 1;
+                                foreach (var z in Model.OrderByDescending(z => z.DataZamowienia).Take(10))
+                                {
+                                    <tr>
+                                        <td>@idx</td>
+                                        <td>@z.Towar?.Nazwa</td>
+                                        <td>@z.Ilosc</td>
+                                        <td>@((z.Towar?.Cena ?? 0) * z.Ilosc)</td>
+                                        <td>@z.DataZamowienia.ToString("yyyy-MM-dd")</td>
+                                    </tr>
+                                    idx++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center">Brak danych</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

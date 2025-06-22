@@ -16,6 +16,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="QuestPDF" Version="2025.5.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +30,6 @@
 		<ItemGroup>
 			<BannerImages Include="wwwroot\images\**\*.*" />
 		</ItemGroup>
-		<Copy
-		  SourceFiles="@(BannerImages)"
-		  DestinationFolder="..\Firma.PortalWWW\wwwroot\images\%(RecursiveDir)"
-		  SkipUnchangedFiles="true"
-    />
+		<Copy SourceFiles="@(BannerImages)" DestinationFolder="..\Firma.PortalWWW\wwwroot\images\%(RecursiveDir)" SkipUnchangedFiles="true" />
 	</Target>
 </Project>
